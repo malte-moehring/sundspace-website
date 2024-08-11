@@ -4,6 +4,6 @@ import NxWelcome from '../app/NxWelcome.vue';
 
 <template>
   <main>
-    <NxWelcome title="frontend" />
+    <div>Test</div>
   </main>
 </template>
