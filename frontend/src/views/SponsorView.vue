@@ -1,3 +1,3 @@
 <template>
-    <div>Sponsor</div>
+  <div>Sponsor</div>
 </template>
