@@ -1,4 +1,5 @@
 <template>
+      <RouterLink to="/rakete">Rakete</RouterLink>
     <!-- The main div that wraps the navigation menu -->
     <div class="navDiv">
       <!-- Navigation element containing links to different pages -->
