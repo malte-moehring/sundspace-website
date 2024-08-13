@@ -10,13 +10,16 @@
       <div class="feed-4">5</div>
       <div class="feed-5">6</div>
       <div class="footer">7</div>
-      <div class="rocket-element">8</div>
+      <div class="rocket-element">
+        <Rocket></Rocket>
+      </div>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
 import Counter from '../components/CounterComponent.vue';
+import Rocket from '../components/RocketComponent.vue';
 </script>
 
 <style scoped lang="css">
@@ -79,5 +82,8 @@ import Counter from '../components/CounterComponent.vue';
   grid-row: span 5 / span 5;
   grid-column-start: 3;
   grid-row-start: 2;
+  width: 100%;
+  max-width: 25vw;
+  height: auto;
 }
 </style>
