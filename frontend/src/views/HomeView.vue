@@ -2,7 +2,8 @@
   <main>
     <div class="parent">
       <div class="splash-screen">
-        <Counter /> <!-- Use the Counter component -->
+        <Counter />
+        <!-- Use the Counter component -->
       </div>
       <div class="feed-1">2</div>
       <div class="feed-2">3</div>
@@ -41,7 +42,6 @@ import Rocket from '../components/RocketComponent.vue';
   justify-content: center;
   align-items: center;
 }
-
 
 .feed-1 {
   grid-column: span 2 / span 2;
