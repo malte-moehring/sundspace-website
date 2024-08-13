@@ -4,11 +4,26 @@
       <div class="splash-screen">
         <Counter /> <!-- Use the Counter component -->
       </div>
-      <div class="feed-1">2</div>
-      <div class="feed-2">3</div>
-      <div class="feed-3">4</div>
-      <div class="feed-4">5</div>
-      <div class="feed-5">6</div>
+      <div class="feed-1">
+        <img :src="feeds[0].image" alt="Feed 1" />
+        <p>{{ feeds[0].text }}</p>
+      </div>
+      <div class="feed-2">
+        <img :src="feeds[1].image" alt="Feed 2" />
+        <p>{{ feeds[1].text }}</p>
+      </div>
+      <div class="feed-3">
+        <img :src="feeds[2].image" alt="Feed 3" />
+        <p>{{ feeds[2].text }}</p>
+      </div>
+      <div class="feed-4">
+        <img :src="feeds[3].image" alt="Feed 4" />
+        <p>{{ feeds[3].text }}</p>
+      </div>
+      <div class="feed-5">
+        <img :src="feeds[4].image" alt="Feed 5" />
+        <p>{{ feeds[4].text }}</p>
+      </div>
       <div class="footer">7</div>
       <div class="rocket-element">8</div>
     </div>
@@ -17,6 +32,68 @@
 
 <script setup lang="ts">
 import Counter from '../components/CounterComponent.vue';
+import { ref, onMounted } from 'vue';
+
+const images = import.meta.glob('../../../src/assets/pics/*.png');
+const texts = import.meta.glob('../../../src/assets/texts/*.txt');
+
+const feeds = ref([
+  {
+    image: '',
+    text: '',
+  },
+  {
+    image: '',
+    text: '',
+  },
+  {
+    image: '',
+    text: '',
+  },
+  {
+    image: '',
+    text: '',
+  },
+  {
+    image: '',
+    text: '',
+  }
+]);
+
+const loadFeeds = async () => {
+  try {
+    const loadedFeeds = await Promise.all(
+      feeds.value.map(async (_, index) => {
+        const imagePaths = Object.keys(images);
+        const textPaths = Object.keys(texts);
+
+        const imagePath = imagePaths[index];
+        const textPath = textPaths[index];
+
+        if (!imagePath || !textPath) { 
+          return { image: '', text: '' };
+        }
+
+        const imageModule = (await images[imagePath]?.()) as { default: string };
+        const textModule = (await texts[textPath]?.()) as { default: string };
+
+        return {
+          image: imageModule?.default || '',
+          text: textModule?.default || ''
+        };
+      })
+    );
+    feeds.value = loadedFeeds;
+  } catch (error) {
+    console.error("Error loading feeds:", error);
+  }
+};
+
+
+onMounted(() => {
+  loadFeeds();
+  
+});
 </script>
 
 <style scoped lang="css">
