@@ -97,6 +97,16 @@ onMounted(() => {
 </script>
 
 <style scoped lang="css">
+img {
+  max-width: 80%;
+  max-height: 80%;
+  padding-left: 10rem;
+}
+
+p {
+  padding-left: 15rem;
+}
+
 .parent {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
