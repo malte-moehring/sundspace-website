@@ -4,34 +4,16 @@
       <div class="splash-screen">
         <Counter /> <!-- Verwende die Counter-Komponente -->
       </div>
-      <div class="feed-1">
-        <img :src="getImagePath(feeds[0].image)" alt="Feed 1" />
-        <div class="card yellow">
-          <p>{{ feeds[0].text }}</p>
-        </div>
-      </div>
-      <div class="feed-2">
-        <img :src="getImagePath(feeds[1].image)" alt="Feed 2" />
-        <div class="card purple">
-          <p>{{ feeds[1].text }}</p>
-        </div>
-      </div>
-      <div class="feed-3">
-        <img :src="getImagePath(feeds[2].image)" alt="Feed 3" />
-        <div class="card yellow">
-          <p>{{ feeds[2].text }}</p>
-        </div>
-      </div>
-      <div class="feed-4">
-        <img :src="getImagePath(feeds[3].image)" alt="Feed 4" />
-        <div class="card purple">
-          <p>{{ feeds[3].text }}</p>
-        </div>
-      </div>
-      <div class="feed-5">
-        <img :src="getImagePath(feeds[4].image)" alt="Feed 5" />
-        <div class="card yellow">
-          <p>{{ feeds[4].text }}</p>
+      <div v-for="(feed, index) in feeds" :key="index" :class="`feed-${index + 1}`">
+        <img :src="getImagePath(feed.image)" :alt="`Feed ${index + 1}`" />
+        <div :class="['card', index % 2 === 0 ? 'yellow' : 'purple', isExpanded[index] ? 'expanded' : '']">
+          <p>
+            {{ isExpanded[index] ? feed.text : feed.text.slice(0, 300) }}
+            <span v-if="!isExpanded[index] && feed.text.length > 300">...</span>
+          </p>
+          <button v-if="feed.text.length > 300" class="expand-button" @click="toggleExpand(index)">
+            {{ isExpanded[index] ? 'Zuklappen' : 'Lies mehr' }}
+          </button>
         </div>
       </div>
       <div class="footer">7</div>
@@ -41,15 +23,21 @@
 </template>
 
 <script setup lang="ts">
-import Counter from '../components/CounterComponent.vue';
 import { ref } from 'vue';
+import Counter from '../components/CounterComponent.vue';
 import feedData from '../../../src/assets/json/feed.json';
 
 const feeds = ref(feedData);
 
+const isExpanded = ref(new Array(feeds.value.length).fill(false));
+
 // Dynamischer Import der Bilder basierend auf dem Bildnamen
 const getImagePath = (imageName: string) => {
   return new URL(`../../../src/assets/pics/${imageName}`, import.meta.url).href;
+};
+
+const toggleExpand = (index: number) => {
+  isExpanded.value[index] = !isExpanded.value[index];
 };
 </script>
 
@@ -145,8 +133,32 @@ p {
   padding-right: 20px; /* Optionales Padding rechts für Symmetrie */
   margin-left: 5rem; /* Setzt den linken Rand zurück */
   width: calc(100% - 10rem); /* Breite des Bildes anpassen, um das Padding zu berücksichtigen */
-  margin-top: -5rem;
+  margin-top: -2.5rem;
   z-index: 999;
+  overflow: hidden;
+  max-height: 150px;
+}
+
+.card.expanded {
+  max-height: none;
+}
+
+.truncated {
+  display: block;
+  max-height: 120px;
+  overflow: hidden;
+}
+
+.expand-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 1000;
+  color: blue;
 }
 
 .yellow {
