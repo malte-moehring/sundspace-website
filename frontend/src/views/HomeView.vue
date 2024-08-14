@@ -19,7 +19,9 @@
       <div class="footer">
         <a class="insta-button" href="https://www.instagram.com/sund.space/" target="_blank" rel="noopener noreferrer">Mehr Neuigkeiten</a>
       </div>
-      <div class="rocket-element">8</div>
+      <div class="rocket-element">
+        <Rocket></Rocket>
+      </div>
       <div class="real_footer">9</div>
     </div>
   </main>
@@ -46,6 +48,10 @@ import Rocket from '../components/RocketComponent.vue';
 </script>
 
 <style scoped lang="css">
+Rocket {
+  height: 100%;
+}
+
 img {
   max-width: 80%; /* Bild füllt den verfügbaren Platz in der Karte */
   max-height: 80%;
@@ -143,8 +149,15 @@ p {
   grid-column-start: 3;
   grid-row-start: 2;
   width: 100%;
-  max-width: 25vw;
   height: auto;
+  max-width: 25vw;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.rocket-element div {
+  width: 100%;
+  height: 100%;
 }
 
 .card {

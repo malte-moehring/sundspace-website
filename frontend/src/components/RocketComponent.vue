@@ -8,8 +8,7 @@ import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 
 // Importiere die .obj-Datei
-import rocketObjUrl from 'src/assets/models/rocket.obj';
-import { join } from 'path';
+import rocketObjUrl from '../../../src/assets/models/rocket.obj';
 
 const rocketContainer = ref<HTMLDivElement | null>(null);
 
