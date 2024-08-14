@@ -2,26 +2,26 @@
   <main>
     <div class="parent">
       <div class="splash-screen">
-        <Counter /> <!-- Use the Counter component -->
+        <Counter /> <!-- Verwende die Counter-Komponente -->
       </div>
       <div class="feed-1">
-        <img :src="feeds[0].image" alt="Feed 1" />
+        <img :src="getImagePath(feeds[0].image)" alt="Feed 1" />
         <p>{{ feeds[0].text }}</p>
       </div>
       <div class="feed-2">
-        <img :src="feeds[1].image" alt="Feed 2" />
+        <img :src="getImagePath(feeds[1].image)" alt="Feed 2" />
         <p>{{ feeds[1].text }}</p>
       </div>
       <div class="feed-3">
-        <img :src="feeds[2].image" alt="Feed 3" />
+        <img :src="getImagePath(feeds[2].image)" alt="Feed 3" />
         <p>{{ feeds[2].text }}</p>
       </div>
       <div class="feed-4">
-        <img :src="feeds[3].image" alt="Feed 4" />
+        <img :src="getImagePath(feeds[3].image)" alt="Feed 4" />
         <p>{{ feeds[3].text }}</p>
       </div>
       <div class="feed-5">
-        <img :src="feeds[4].image" alt="Feed 5" />
+        <img :src="getImagePath(feeds[4].image)" alt="Feed 5" />
         <p>{{ feeds[4].text }}</p>
       </div>
       <div class="footer">7</div>
@@ -32,68 +32,15 @@
 
 <script setup lang="ts">
 import Counter from '../components/CounterComponent.vue';
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
+import feedData from '../../../src/assets/json/feed.json';
 
-const images = import.meta.glob('../../../src/assets/pics/*.png');
-const texts = import.meta.glob('../../../src/assets/texts/*.txt');
+const feeds = ref(feedData);
 
-const feeds = ref([
-  {
-    image: '',
-    text: '',
-  },
-  {
-    image: '',
-    text: '',
-  },
-  {
-    image: '',
-    text: '',
-  },
-  {
-    image: '',
-    text: '',
-  },
-  {
-    image: '',
-    text: '',
-  }
-]);
-
-const loadFeeds = async () => {
-  try {
-    const loadedFeeds = await Promise.all(
-      feeds.value.map(async (_, index) => {
-        const imagePaths = Object.keys(images);
-        const textPaths = Object.keys(texts);
-
-        const imagePath = imagePaths[index];
-        const textPath = textPaths[index];
-
-        if (!imagePath || !textPath) { 
-          return { image: '', text: '' };
-        }
-
-        const imageModule = (await images[imagePath]?.()) as { default: string };
-        const textModule = (await texts[textPath]?.()) as { default: string };
-
-        return {
-          image: imageModule?.default || '',
-          text: textModule?.default || ''
-        };
-      })
-    );
-    feeds.value = loadedFeeds;
-  } catch (error) {
-    console.error("Error loading feeds:", error);
-  }
+// Dynamischer Import der Bilder basierend auf dem Bildnamen
+const getImagePath = (imageName: string) => {
+  return new URL(`../../../src/assets/pics/${imageName}`, import.meta.url).href;
 };
-
-
-onMounted(() => {
-  loadFeeds();
-  
-});
 </script>
 
 <style scoped lang="css">
@@ -125,7 +72,6 @@ p {
   justify-content: center;
   align-items: center;
 }
-
 
 .feed-1 {
   grid-column: span 2 / span 2;
