@@ -15,7 +15,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding:0 1rem;
+  padding: 0 1rem;
   max-width: 100%;
 }
 
