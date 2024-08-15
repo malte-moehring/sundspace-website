@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
 import Navbar from '../components/NavBarComponent.vue';
+import Footer from '../components/FooterComponent.vue';
 </script>
 
 <template>
@@ -8,9 +9,15 @@ import Navbar from '../components/NavBarComponent.vue';
     <Navbar></Navbar>
   </header>
   <RouterView />
+  <div class="breaker"></div>
+  <Footer></Footer>
 </template>
 
 <style scoped lang="css">
+.breaker {
+  height: 10rem;
+}
+
 header {
   display: flex;
   justify-content: center;
