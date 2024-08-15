@@ -2,24 +2,91 @@
   <main>
     <div class="parent">
       <div class="splash-screen">
-        <Counter /> <!-- Use the Counter component -->
+        <Counter />
+        <!-- Verwende die Counter-Komponente -->
       </div>
-      <div class="feed-1">2</div>
-      <div class="feed-2">3</div>
-      <div class="feed-3">4</div>
-      <div class="feed-4">5</div>
-      <div class="feed-5">6</div>
-      <div class="footer">7</div>
-      <div class="rocket-element">8</div>
+      <div
+        v-for="(feed, index) in feeds"
+        :key="index"
+        :class="`feed-${index + 1}`"
+      >
+        <img :src="getImagePath(feed.image)" :alt="`Feed ${index + 1}`" />
+        <div
+          :class="[
+            'card',
+            index % 2 === 0 ? 'yellow' : 'purple',
+            isExpanded[index] ? 'expanded' : '',
+          ]"
+        >
+          <p>
+            {{ isExpanded[index] ? feed.text : feed.text.slice(0, 300) }}
+            <span v-if="!isExpanded[index] && feed.text.length > 300">...</span>
+          </p>
+          <button
+            v-if="feed.text.length > 300"
+            class="expand-button"
+            @click="toggleExpand(index)"
+          >
+            {{ isExpanded[index] ? 'Zuklappen' : 'Lies mehr' }}
+          </button>
+        </div>
+      </div>
+      <div class="footer">
+        <a
+          class="insta-button"
+          href="https://www.instagram.com/sund.space/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Mehr Neuigkeiten</a
+        >
+      </div>
+      <div class="rocket-element">
+        <Rocket></Rocket>
+      </div>
+      <div class="real_footer">9</div>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import Counter from '../components/CounterComponent.vue';
+import feedData from '../../../src/assets/json/feed.json';
+
+const feeds = ref(feedData);
+
+const isExpanded = ref(new Array(feeds.value.length).fill(false));
+
+// Dynamischer Import der Bilder basierend auf dem Bildnamen
+const getImagePath = (imageName: string) => {
+  return new URL(`../../../src/assets/pics/${imageName}`, import.meta.url).href;
+};
+
+const toggleExpand = (index: number) => {
+  isExpanded.value[index] = !isExpanded.value[index];
+};
+import Rocket from '../components/RocketComponent.vue';
 </script>
 
 <style scoped lang="css">
+Rocket {
+  height: 100%;
+}
+
+img {
+  max-width: 80%; /* Bild füllt den verfügbaren Platz in der Karte */
+  max-height: 80%;
+  border-radius: 20px; /* Rundet alle Ecken des Bildes */
+  object-fit: cover; /* Das Bild wird so angepasst, dass es den Container ausfüllt */
+  z-index: 1;
+  position: relative;
+}
+
+p {
+  padding: 20px;
+  color: black;
+}
+
 .parent {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -33,51 +100,148 @@ import Counter from '../components/CounterComponent.vue';
 
 .splash-screen {
   grid-column: span 3 / span 3;
-  height: 80vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
 .feed-1 {
+  position: relative;
   grid-column: span 2 / span 2;
   grid-row-start: 2;
+  margin-left: 10rem;
+  margin-bottom: 5rem;
 }
 
 .feed-2 {
+  position: relative;
   grid-column: span 2 / span 2;
   grid-column-start: 1;
   grid-row-start: 3;
+  margin-left: 10rem;
+  margin-bottom: 5rem;
 }
 
 .feed-3 {
+  position: relative;
   grid-column: span 2 / span 2;
   grid-column-start: 1;
   grid-row-start: 4;
+  margin-left: 10rem;
+  margin-bottom: 5rem;
 }
 
 .feed-4 {
+  position: relative;
   grid-column: span 2 / span 2;
   grid-column-start: 1;
   grid-row-start: 5;
+  margin-left: 10rem;
+  margin-bottom: 5rem;
 }
 
 .feed-5 {
+  position: relative;
   grid-column: span 2 / span 2;
   grid-column-start: 1;
   grid-row-start: 6;
+  margin-left: 10rem;
 }
 
 .footer {
   grid-column: span 3 / span 3;
   grid-column-start: 1;
   grid-row-start: 7;
+  display: flex; /* Flexbox verwenden */
+  justify-content: center; /* Zentrieren des Inhalts horizontal */
+  align-items: center; /* Zentrieren des Inhalts vertikal */
+  height: 100px; /* Stellen Sie sicher, dass der Container genügend Höhe hat */
+}
+
+.real_footer {
+  grid-column: span 3 / span 3;
+  grid-column-start: 1;
+  grid-row-start: 8;
 }
 
 .rocket-element {
   grid-row: span 5 / span 5;
   grid-column-start: 3;
   grid-row-start: 2;
+  width: 100%;
+  height: auto;
+  max-width: 25vw;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.rocket-element div {
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  position: absolute;
+  border-radius: 20px;
+  padding-right: 20px; /* Optionales Padding rechts für Symmetrie */
+  margin-left: 5rem; /* Setzt den linken Rand zurück */
+  width: calc(
+    100% - 10rem
+  ); /* Breite des Bildes anpassen, um das Padding zu berücksichtigen */
+  margin-top: -2.5rem;
+  z-index: 999;
+  overflow: hidden;
+  max-height: 150px;
+}
+
+.card.expanded {
+  max-height: none;
+}
+
+.truncated {
+  display: block;
+  max-height: 120px;
+  overflow: hidden;
+}
+
+.expand-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+  z-index: 1000;
+  color: blue;
+}
+
+.insta-button {
+  display: inline-flex; /* Flexbox verwenden, um Button-Styling zu ermöglichen */
+  align-items: center; /* Zentrieren des Textes vertikal */
+  justify-content: center; /* Zentrieren des Textes horizontal */
+  background-color: #fddb3a;
+  border: none; /* Entfernen der Standard-Border */
+  border-radius: 20px;
+  width: 150px;
+  height: 50px;
+  color: black;
+  font-size: 16px; /* Größe des Textes */
+  text-align: center; /* Text im Button zentrieren */
+  text-decoration: none; /* Entfernt Unterstreichung vom Link */
+}
+
+.insta-button:hover {
+  background-color: blueviolet;
+  color: #dadada;
+}
+
+.yellow {
+  background-color: #fddb3a;
+}
+
+.purple {
+  background-color: blueviolet;
 }
 </style>
