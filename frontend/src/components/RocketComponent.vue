@@ -1,8 +1,8 @@
 <template>
-    <div ref="rocketContainer"></div>
-  </template>
-  
-  <script setup lang="ts">
+  <div ref="rocketContainer"></div>
+</template>
+
+<script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
@@ -14,10 +14,18 @@ const rocketContainer = ref<HTMLDivElement | null>(null);
 
 onMounted(() => {
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, rocketContainer.value!.clientWidth / rocketContainer.value!.clientHeight, 0.1, 1000);
-  
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    rocketContainer.value!.clientWidth / rocketContainer.value!.clientHeight,
+    0.1,
+    1000
+  );
+
   const renderer = new THREE.WebGLRenderer({ alpha: true });
-  renderer.setSize(rocketContainer.value!.clientWidth, rocketContainer.value!.clientHeight);
+  renderer.setSize(
+    rocketContainer.value!.clientWidth,
+    rocketContainer.value!.clientHeight
+  );
   rocketContainer.value!.appendChild(renderer.domElement);
 
   const ambientLight = new THREE.AmbientLight(0x404040);
@@ -55,17 +63,20 @@ onMounted(() => {
   camera.lookAt(0, 50, -200);
 
   window.addEventListener('resize', () => {
-    camera.aspect = rocketContainer.value!.clientWidth / rocketContainer.value!.clientHeight;
+    camera.aspect =
+      rocketContainer.value!.clientWidth / rocketContainer.value!.clientHeight;
     camera.updateProjectionMatrix();
-    renderer.setSize(rocketContainer.value!.clientWidth, rocketContainer.value!.clientHeight);
+    renderer.setSize(
+      rocketContainer.value!.clientWidth,
+      rocketContainer.value!.clientHeight
+    );
   });
 });
 </script>
-  
+
 <style scoped>
 div {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 </style>
-  

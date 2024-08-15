@@ -2,22 +2,43 @@
   <main>
     <div class="parent">
       <div class="splash-screen">
-        <Counter /> <!-- Verwende die Counter-Komponente -->
+        <Counter />
+        <!-- Verwende die Counter-Komponente -->
       </div>
-      <div v-for="(feed, index) in feeds" :key="index" :class="`feed-${index + 1}`">
+      <div
+        v-for="(feed, index) in feeds"
+        :key="index"
+        :class="`feed-${index + 1}`"
+      >
         <img :src="getImagePath(feed.image)" :alt="`Feed ${index + 1}`" />
-        <div :class="['card', index % 2 === 0 ? 'yellow' : 'purple', isExpanded[index] ? 'expanded' : '']">
+        <div
+          :class="[
+            'card',
+            index % 2 === 0 ? 'yellow' : 'purple',
+            isExpanded[index] ? 'expanded' : '',
+          ]"
+        >
           <p>
             {{ isExpanded[index] ? feed.text : feed.text.slice(0, 300) }}
             <span v-if="!isExpanded[index] && feed.text.length > 300">...</span>
           </p>
-          <button v-if="feed.text.length > 300" class="expand-button" @click="toggleExpand(index)">
+          <button
+            v-if="feed.text.length > 300"
+            class="expand-button"
+            @click="toggleExpand(index)"
+          >
             {{ isExpanded[index] ? 'Zuklappen' : 'Lies mehr' }}
           </button>
         </div>
       </div>
       <div class="footer">
-        <a class="insta-button" href="https://www.instagram.com/sund.space/" target="_blank" rel="noopener noreferrer">Mehr Neuigkeiten</a>
+        <a
+          class="insta-button"
+          href="https://www.instagram.com/sund.space/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Mehr Neuigkeiten</a
+        >
       </div>
       <div class="rocket-element">
         <Rocket></Rocket>
@@ -63,7 +84,7 @@ img {
 
 p {
   padding: 20px;
-  color:black
+  color: black;
 }
 
 .parent {
@@ -165,7 +186,9 @@ p {
   border-radius: 20px;
   padding-right: 20px; /* Optionales Padding rechts für Symmetrie */
   margin-left: 5rem; /* Setzt den linken Rand zurück */
-  width: calc(100% - 10rem); /* Breite des Bildes anpassen, um das Padding zu berücksichtigen */
+  width: calc(
+    100% - 10rem
+  ); /* Breite des Bildes anpassen, um das Padding zu berücksichtigen */
   margin-top: -2.5rem;
   z-index: 999;
   overflow: hidden;
