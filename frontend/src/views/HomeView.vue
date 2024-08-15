@@ -43,7 +43,6 @@
       <div class="rocket-element">
         <Rocket></Rocket>
       </div>
-      <div class="real_footer">9</div>
     </div>
   </main>
 </template>
@@ -157,12 +156,6 @@ p {
   justify-content: center; /* Zentrieren des Inhalts horizontal */
   align-items: center; /* Zentrieren des Inhalts vertikal */
   height: 100px; /* Stellen Sie sicher, dass der Container genügend Höhe hat */
-}
-
-.real_footer {
-  grid-column: span 3 / span 3;
-  grid-column-start: 1;
-  grid-row-start: 8;
 }
 
 .rocket-element {
