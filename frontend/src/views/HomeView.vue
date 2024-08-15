@@ -214,7 +214,7 @@ p {
   display: inline-flex; /* Flexbox verwenden, um Button-Styling zu ermöglichen */
   align-items: center; /* Zentrieren des Textes vertikal */
   justify-content: center; /* Zentrieren des Textes horizontal */
-  background-color: #fddb3a;
+  background-color: blueviolet;
   border: none; /* Entfernen der Standard-Border */
   border-radius: 20px;
   width: 150px;
@@ -226,8 +226,7 @@ p {
 }
 
 .insta-button:hover {
-  background-color: blueviolet;
-  color: #dadada;
+  background-color: #fddb3a;
 }
 
 .yellow {

@@ -41,23 +41,35 @@
   
   <style scoped>
   .footer {
+    border-top: solid 2px #fddb3a;
     background-color: #000; /* Schwarzer Hintergrund */
     color: #fff; /* Weißer Text */
     padding: 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Zentriere den gesamten Footer horizontal */
   }
   
   .footer-content {
     display: flex;
     justify-content: space-between;
+    align-items: center; /* Zentriere die Inhalte vertikal */
     width: 100%;
+    max-width: 1200px; /* Maximalbreite, um den Inhalt zu beschränken */
   }
   
-  .footer-left {
+  .footer-left, .footer-right {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center; /* Zentriere die Inhalte horizontal */
+    text-align: center; /* Text zentrieren */
+  }
+
+  .footer-left {
+    padding-left: 5rem;
+  }
+
+  .footer-right {
+    padding-right: 5rem;
   }
   
   .footer-logo {
@@ -68,11 +80,6 @@
   .footer-address {
     font-size: 1rem;
     line-height: 1.5;
-  }
-  
-  .footer-right {
-    display: flex;
-    flex-direction: column;
   }
   
   .footer-right h3 {
@@ -96,5 +103,6 @@
     font-size: 1rem;
     transition: color 0.3s;
   }
+  
   </style>
   

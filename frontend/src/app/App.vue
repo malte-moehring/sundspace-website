@@ -9,10 +9,15 @@ import Footer from '../components/FooterComponent.vue';
     <Navbar></Navbar>
   </header>
   <RouterView />
+  <div class="breaker"></div>
   <Footer></Footer>
 </template>
 
 <style scoped lang="css">
+.breaker {
+  height: 10rem;
+}
+
 header {
   display: flex;
   justify-content: center;
