@@ -2,6 +2,7 @@
   "compilerOptions": {},
   "files": [],
   "include": [],
+  "typeRoots": ["./node_modules/@types", "./src/types"],
   "references": [
     {
       "path": "./tsconfig.lib.json"
