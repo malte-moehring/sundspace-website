@@ -1,53 +1,100 @@
 <template>
-    <div class="footer-div">
-        <div id="div1">
-            <img alt="Sundspace Logo" src="../../../src/assets/pics/logo_schwarz.png">
+    <footer class="footer">
+      <div class="footer-content">
+        <!-- Linke Seite: Logo und Adresse -->
+        <div class="footer-left">
+          <img src="/public/assets/images/logo_schwarz.png" alt="SundSpace Logo" class="footer-logo" />
+          <address class="footer-address">
+            <strong>SUNDSPACE e.V.</strong><br />
+            Zur Schwedenschanze 15<br />
+            18435 Stralsund
+          </address>
         </div>
-	    <div id="div2">
-            <p>Sundspace e.V.</p>
-            <p>Zur Schwedenschanze 15</p>
-            <p>18435 Stralsund</p>
+        
+        <!-- Rechte Seite: Navigation -->
+        <div class="footer-right">
+          <h3>Internes</h3>
+          <ul class="footer-nav">
+            <li>
+              <router-link to="/impressum" exact-active-class="active">Impressum</router-link>
+            </li>
+            <li>
+              <router-link to="/datenschutzerklärung" exact-active-class="active">Datenschutzerklärung</router-link>
+            </li>
+            <li>
+              <router-link to="/sponsoring" exact-active-class="active">Sponsoren</router-link>
+            </li>
+            <li>
+              <router-link to="/kontakt" exact-active-class="active">Kontakt</router-link>
+            </li>
+          </ul>
         </div>
-	    <div id="div3">
-            <h3>Internes</h3>
-            <p><a>Impressum</a></p>
-            <p><a>Datenschutzerklärung</a></p>
-            <p><a>Sponsoren</a></p>
-            <p><a>Kontakt</a></p>
-        </div>
-    </div>
-</template>
-
-<script lang="ts">
-
-</script>
-
-<style scoped lang="css">
-.footer-div {
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    width: 100%;
-    height: 100%;
-}
-
-.footer-div div {
+      </div>
+    </footer>
+  </template>
+  
+  <script>
+  export default {
+    name: 'FooterComponent',
+  };
+  </script>
+  
+  <style scoped>
+  .footer {
+    background-color: #000; /* Schwarzer Hintergrund */
+    color: #fff; /* Weißer Text */
+    padding: 2rem;
     display: flex;
-    align-items: center;
     justify-content: space-between;
-    color: #dadada;
-}
-
-#div1 {
-    grid-area: 1/1/2/2;
-}
-
-#div2 {
-    grid-area: 2/1/3/2;
-}
-
-#div3 {
-    grid-area: 1/2/3/3;
-}
-</style>
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .footer-logo {
+    width: 20rem; /* Logo-Breite anpassen */
+    margin-bottom: 1rem;
+  }
+  
+  .footer-address {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  .footer-right {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer-right h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .footer-nav {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-nav li {
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+  
+  .footer-nav a {
+    color: blueviolet;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+  }
+  </style>
+  
