@@ -100,7 +100,7 @@ p {
 
 .splash-screen {
   grid-column: span 3 / span 3;
-  height: 80vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
