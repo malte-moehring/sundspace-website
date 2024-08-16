@@ -2,6 +2,7 @@
   <main>
     <div class="parent">
       <div class="splash-screen">
+        <Hyperdrive></Hyperdrive>
         <Counter />
         <!-- Verwende die Counter-Komponente -->
       </div>
@@ -51,6 +52,7 @@
 import { ref } from 'vue';
 import Counter from '../components/CounterComponent.vue';
 import feedData from '../../../src/assets/json/feed.json';
+import Hyperdrive from '../components/HyperdriveComponent.vue';
 
 const feeds = ref(feedData);
 
@@ -103,6 +105,7 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
 }
 
 .feed-1 {
