@@ -1,0 +1,162 @@
+[
+  {
+    "id": 1,
+    "name": "Alice Müller",
+    "role": "Frontend Developer",
+    "tags": ["Frontend", "Vue.js"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Alice is a frontend expert specializing in Vue.js and modern JavaScript frameworks."
+  },
+  {
+    "id": 2,
+    "name": "Bob Schmidt",
+    "role": "Backend Developer",
+    "tags": ["Backend", "Node.js"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Bob is our backend wizard with a focus on Node.js and scalable server solutions."
+  },
+  {
+    "id": 3,
+    "name": "Carla Weber",
+    "role": "UX/UI Designer",
+    "tags": ["Design", "UX/UI"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Carla designs intuitive and user-friendly interfaces, ensuring a great user experience."
+  },
+  {
+    "id": 4,
+    "name": "David Becker",
+    "role": "Project Manager",
+    "tags": ["Management", "Scrum"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "David leads our projects, managing timelines and ensuring smooth execution using Scrum methodologies."
+  },
+  {
+    "id": 5,
+    "name": "Eva Lange",
+    "role": "Data Scientist",
+    "tags": ["Data", "Machine Learning"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Eva analyzes data and builds predictive models to help us make data-driven decisions."
+  },
+  {
+    "id": 6,
+    "name": "Frank Meyer",
+    "role": "DevOps Engineer",
+    "tags": ["DevOps", "Cloud"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Frank ensures our development and production environments are stable and scalable using cloud technologies."
+  },
+  {
+    "id": 7,
+    "name": "Gina Hoffmann",
+    "role": "Full Stack Developer",
+    "tags": ["Full Stack", "JavaScript"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Gina works on both the frontend and backend, providing versatile solutions across our tech stack."
+  },
+  {
+    "id": 8,
+    "name": "Hans Schuster",
+    "role": "Business Analyst",
+    "tags": ["Business", "Analysis"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Hans translates business requirements into technical solutions, ensuring our products meet market needs."
+  },
+  {
+    "id": 9,
+    "name": "Ingrid Klein",
+    "role": "Marketing Specialist",
+    "tags": ["Marketing", "SEO"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Ingrid develops marketing strategies and optimizes our online presence to drive user engagement."
+  },
+  {
+    "id": 10,
+    "name": "Jürgen Wagner",
+    "role": "Software Architect",
+    "tags": ["Architecture", "Design Patterns"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Jürgen designs the software architecture, ensuring scalable and maintainable solutions."
+  },
+  {
+    "id": 11,
+    "name": "Klara Fuchs",
+    "role": "System Analyst",
+    "tags": ["Systems", "Analysis"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Klara analyzes and improves system performance, focusing on efficiency and reliability."
+  },
+  {
+    "id": 12,
+    "name": "Lukas Müller",
+    "role": "Security Engineer",
+    "tags": ["Security", "Compliance"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Lukas ensures the security of our applications and data, implementing best practices for compliance and protection."
+  },
+  {
+    "id": 13,
+    "name": "Maria Fischer",
+    "role": "Technical Writer",
+    "tags": ["Writing", "Documentation"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Maria creates and maintains technical documentation, helping users and developers understand our products."
+  },
+  {
+    "id": 14,
+    "name": "Nico Braun",
+    "role": "QA Engineer",
+    "tags": ["Quality Assurance", "Testing"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Nico tests our software to identify and resolve issues, ensuring high quality and reliability."
+  },
+  {
+    "id": 15,
+    "name": "Olivia Schneider",
+    "role": "Customer Support Specialist",
+    "tags": ["Support", "Customer Service"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Olivia provides support to our customers, addressing their concerns and helping them with product-related issues."
+  },
+  {
+    "id": 16,
+    "name": "Paul Richter",
+    "role": "Cloud Engineer",
+    "tags": ["Cloud", "Infrastructure"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Paul manages our cloud infrastructure, optimizing performance and ensuring reliable services."
+  },
+  {
+    "id": 17,
+    "name": "Quinn Hartmann",
+    "role": "Database Administrator",
+    "tags": ["Database", "SQL"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Quinn administers our databases, ensuring data integrity and performance."
+  },
+  {
+    "id": 18,
+    "name": "Rita Meyer",
+    "role": "Product Owner",
+    "tags": ["Product", "Ownership"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Rita defines the product vision and roadmap, working closely with stakeholders to align product goals."
+  },
+  {
+    "id": 19,
+    "name": "Simon Weber",
+    "role": "Integration Specialist",
+    "tags": ["Integration", "APIs"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Simon handles the integration of various systems and services, ensuring seamless connectivity and data flow."
+  },
+  {
+    "id": 20,
+    "name": "Tina Berg",
+    "role": "Research Scientist",
+    "tags": ["Research", "Innovation"],
+    "image": "https://www.thispersondoesnotexist.com/",
+    "description": "Tina conducts research to drive innovation and explore new technologies for our projects."
+  }
+]

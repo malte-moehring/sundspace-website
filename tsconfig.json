@@ -1,24 +1,8 @@
 {
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "commonjs",
-    "lib": ["es2020", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@sundspace-website/source": ["src/index.ts"]
-    }
-  },
+  "compilerOptions": {},
   "files": [],
   "include": [],
+  "typeRoots": ["./node_modules/@types", "./src/types"],
   "references": [
     {
       "path": "./tsconfig.lib.json"
@@ -26,5 +10,6 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ]
+  ],
+  "extends": "./tsconfig.base.json"
 }
