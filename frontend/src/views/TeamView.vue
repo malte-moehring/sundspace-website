@@ -1,6 +1,11 @@
 <template>
   <div class="team-intro">
-    <img class="intro_img" src="../../../src/assets/pics/team/intro_image.png" alt="team intro sundspace">
+    <img class="intro_img" :src="introImage" alt="team intro sundspace">
+    <p>
+      Zentrale Bedeutung des Vereins ist eine effiziente Systementwicklung, an der sowohl die Studierenden als auch die Professoren und Professorinnen der Hochschule Stralsund beteiligt sind.
+      <br>
+      Dazu befolgt das Team eine Koordinationsstrategie, in der die Aufgabenbereiche in den jeweiligen Abteilungen Elektrotechnik und Informatik, Maschinenbau und Management unterteilt werden.
+      </p>
   </div>
   <div class="team-view">
     <div class="tag-filters">
@@ -35,6 +40,7 @@
 import TeamMemberCardComponent from '../components/TeamMemberCardComponent.vue';
 import ProfileOverlay from '../components/TeamMemberOverlayComponent.vue';
 import members from '../../../src/assets/json/members.json';
+import introImage from '../../../src/assets/pics/team/intro_image.png';
 
 export default {
   components: {
@@ -45,7 +51,8 @@ export default {
     return {
       members,
       selectedMember: null,
-      selectedTag: null
+      selectedTag: null,
+      introImage
     };
   },
   computed: {
@@ -98,6 +105,22 @@ export default {
 .team-intro {
   height: 100vh;
   width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-intro p {
+  color: #fff;
+  padding: 20px;
+  font-size: 24;
+  font-style: italic;
+  max-width: 30rem;
+}
+
+.intro_img {
+  width: 45rem;
+  height: auto;
 }
 
 .team-view {
@@ -116,8 +139,8 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 75px;
+  margin-right: 75px;
 }
 
 .tag {
