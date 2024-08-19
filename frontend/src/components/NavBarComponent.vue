@@ -1,167 +1,179 @@
 <template>
-  <div class="navDiv" :class="{ expanded: isExpanded, fixed: isFixed }">
+  <!-- The navigation container with dynamic classes based on the component's state -->
+  <div ref="navDiv" class="navDiv" :class="{ expanded: isExpanded, fixed: isFixed }">
     <nav class="navMenu">
-      <!-- Navigation Links -->
-      <RouterLink to="/" exact-active-class="router-link-active" exact
-        >Start</RouterLink
-      >
+      <!-- RouterLinks define navigation links to different routes within the application -->
+      <RouterLink to="/" exact-active-class="router-link-active" exact>Start</RouterLink>
       <RouterLink to="/team" active-class="router-link-active">Team</RouterLink>
-      <RouterLink to="/rakete" active-class="router-link-active"
-        >Rakete</RouterLink
-      >
-      <RouterLink to="/wettbewerb" active-class="router-link-active"
-        >Wettbewerb</RouterLink
-      >
-      <RouterLink to="/kontakt" active-class="router-link-active"
-        >Kontakt</RouterLink
-      >
-      <RouterLink to="/sponsoring" active-class="router-link-active"
-        >Sponsoring</RouterLink
-      >
-      <div class="dot"></div>
+      <RouterLink to="/rakete" active-class="router-link-active">Rakete</RouterLink>
+      <RouterLink to="/wettbewerb" active-class="router-link-active">Wettbewerb</RouterLink>
+      <RouterLink to="/kontakt" active-class="router-link-active">Kontakt</RouterLink>
+      <RouterLink to="/sponsoring" active-class="router-link-active">Sponsoring</RouterLink>
+      <!-- A div element with the class 'dot', used for highlighting navigation items -->
+      <div ref="dot" class="dot"></div>
     </nav>
   </div>
 </template>
 
-<script>
-import { onMounted } from 'vue';
+<script lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 export default {
-  data() {
-    return {
-      isExpanded: false,
-      isFixed: false,
-    };
-  },
   setup() {
-    onMounted(() => {
-      const menu = document.querySelector('.navMenu');
-      const dot = document.querySelector('.dot');
+    // Reactive references to DOM elements and state variables
+    const navDiv = ref<HTMLElement | null>(null);
+    const dot = ref<HTMLElement | null>(null);
+    const isExpanded = ref(false);
+    const isFixed = ref(false);
+
+    // Method to update the dot's position based on the hovered navigation item
+    const updateDotPosition = () => {
+      const menu = navDiv.value?.querySelector('.navMenu') as HTMLElement;
       const items = menu ? Array.from(menu.querySelectorAll('a')) : [];
+      const hoveredItem = items.find((item) => item.matches(':hover'));
 
-      const updateDotPosition = () => {
-        const hoveredItem = items.find((item) => item.matches(':hover'));
+      if (hoveredItem && dot.value) {
+        const itemWidth = hoveredItem.offsetWidth;
+        const itemPosition = hoveredItem.offsetLeft;
+        dot.value.style.transform = `translateX(${itemPosition + itemWidth / 2}px)`;
+        dot.value.style.opacity = '1';
+      }
+    };
 
-        if (hoveredItem && dot) {
-          const itemWidth = hoveredItem.offsetWidth;
-          const itemPosition = hoveredItem.offsetLeft;
-          dot.style.transform = `translateX(${itemPosition + itemWidth / 2}px)`;
-          dot.style.opacity = '1';
+    // Method to handle the scroll event and adjust navigation state
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > 0) {
+        isExpanded.value = true;
+      } else {
+        isExpanded.value = false;
+      }
+
+      if (navDiv.value) {
+        if (isExpanded.value && scrollTop >= navDiv.value.offsetTop) {
+          isFixed.value = true;
+        } else {
+          isFixed.value = false;
         }
-      };
+      }
+    };
+
+    // Setup event listeners when the component is mounted
+    onMounted(() => {
+      window.addEventListener('scroll', handleScroll);
+
+      const menu = navDiv.value?.querySelector('.navMenu') as HTMLElement;
+      const items = menu ? Array.from(menu.querySelectorAll('a')) : [];
 
       items.forEach((item) => {
         item.addEventListener('mouseover', updateDotPosition);
         item.addEventListener('mouseleave', () => {
-          if (dot) {
-            dot.style.opacity = '0'; // Make the dot invisible
+          if (dot.value) {
+            dot.value.style.opacity = '0'; // Hide the dot when mouse leaves
           }
         });
       });
 
-      if (dot) {
-        dot.style.transition =
-          'transform 0.2s ease-in-out, opacity 0.2s ease-in-out';
+      if (dot.value) {
+        dot.value.style.transition = 'transform 0.2s ease-in-out, opacity 0.2s ease-in-out';
       }
     });
-  },
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  beforeUnmounted() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-  methods: {
-    handleScroll() {
-      const scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop > 0) {
-        this.isExpanded = true;
-      } else {
-        this.isExpanded = false;
-      }
+    // Remove the event listener before the component is unmounted
+    onBeforeUnmount(() => {
+      window.removeEventListener('scroll', handleScroll);
+    });
 
-      const navbar = this.$el.querySelector('.navDiv');
-      if (this.isExpanded && scrollTop >= navbar.offsetTop) {
-        this.isFixed = true;
-      } else {
-        this.isFixed = false;
-      }
-    },
+    // Return the reactive references to be used in the template
+    return {
+      navDiv,
+      dot,
+      isExpanded,
+      isFixed,
+    };
   },
 };
 </script>
 
 <style scoped>
+/* Imports the Montserrat font from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
+/* General CSS resets for box model adjustments */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+/* Defines the styling for the navigation container element */
 .navDiv {
-  position: fixed;
+  position: fixed; /* Fixes the navigation at the top of the screen */
   width: 50vw;
   height: 8vh;
   padding: 10px 20px;
   top: 20px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translateX(-50%); /* Horizontally centers the element */
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
-  background-color: #272727;
-  transition: all 1s ease-in-out;
-  z-index: 9999;
+  border-radius: 20px; /* Rounded corners */
+  background-color: #272727; /* Background color */
+  transition: all 1s ease-in-out; /* Transition effect */
+  z-index: 9999; /* Ensures the navigation is displayed on top */
 }
 
+/* Defines the styling for the navigation element (menu bar) */
 .navMenu {
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: space-between; /* Distributes links evenly */
   align-items: center;
-  position: relative; /* Added to position the dot correctly */
+  position: relative; /* Allows positioning of the 'dot' element */
 }
 
+/* Styling for the navigation links */
 .navMenu a {
   color: #dadada;
-  text-decoration: none;
+  text-decoration: none; /* Removes default underline */
   font-size: 1.2em;
-  text-transform: uppercase;
+  text-transform: uppercase; /* Converts text to uppercase */
   font-weight: 500;
   padding: 0 15px;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out; /* Smooth transition for color changes */
 }
 
+/* Styling for the active link (currently selected link) */
 .navMenu a.router-link-active {
-  color: #fddb3a; /* Die Farbe des aktiven Links */
+  color: #fddb3a; /* Yellow color for the active link */
 }
 
+/* Styling for the 'dot' element displayed under navigation items */
 .navMenu .dot {
   position: absolute;
   bottom: -1rem;
   width: 6px;
   height: 6px;
-  background: #fddb3a;
-  border-radius: 50%;
-  opacity: 0;
-  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  background: #fddb3a; /* Same color as the active link */
+  border-radius: 50%; /* Makes the element circular */
+  opacity: 0; /* Starts invisible */
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out; /* Smooth transitions for movement and visibility */
 }
 
+/* Styling for when the navigation is expanded */
 .expanded {
   width: 100vw;
   border-radius: 0;
   top: 0;
 }
 
+/* Styling for when the navigation is fixed */
 .fixed {
   position: fixed;
   top: 0;
-  left: 0;
+  left: 50%;
   right: 0;
   z-index: 1000;
 }
