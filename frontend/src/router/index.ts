@@ -43,7 +43,7 @@ const router = createRouter({
       path: '/datenschutzerklärung',
       name: 'datenschutzerklärung',
       component: () => import('../views/PrivacyPolicyView.vue'),
-    }
+    },
   ],
 });
 
