@@ -34,6 +34,16 @@ const router = createRouter({
       name: 'sponsoring',
       component: () => import('../views/SponsorView.vue'),
     },
+    {
+      path: '/impressum',
+      name: 'impressum',
+      component: () => import('../views/ImprintView.vue'),
+    },
+    {
+      path: '/datenschutzerklärung',
+      name: 'datenschutzerklärung',
+      component: () => import('../views/PrivacyPolicyView.vue'),
+    },
   ],
 });
 

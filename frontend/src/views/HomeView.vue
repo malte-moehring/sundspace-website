@@ -43,7 +43,6 @@
       <div class="rocket-element">
         <Rocket></Rocket>
       </div>
-      <div class="real_footer">9</div>
     </div>
   </main>
 </template>
@@ -100,7 +99,7 @@ p {
 
 .splash-screen {
   grid-column: span 3 / span 3;
-  height: 80vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -159,12 +158,6 @@ p {
   height: 100px; /* Stellen Sie sicher, dass der Container genügend Höhe hat */
 }
 
-.real_footer {
-  grid-column: span 3 / span 3;
-  grid-column-start: 1;
-  grid-row-start: 8;
-}
-
 .rocket-element {
   grid-row: span 5 / span 5;
   grid-column-start: 3;
@@ -221,7 +214,7 @@ p {
   display: inline-flex; /* Flexbox verwenden, um Button-Styling zu ermöglichen */
   align-items: center; /* Zentrieren des Textes vertikal */
   justify-content: center; /* Zentrieren des Textes horizontal */
-  background-color: #fddb3a;
+  background-color: blueviolet;
   border: none; /* Entfernen der Standard-Border */
   border-radius: 20px;
   width: 150px;
@@ -233,8 +226,7 @@ p {
 }
 
 .insta-button:hover {
-  background-color: blueviolet;
-  color: #dadada;
+  background-color: #fddb3a;
 }
 
 .yellow {
