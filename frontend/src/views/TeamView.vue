@@ -1,5 +1,7 @@
 <template>
-  <div class="team-intro"></div>
+  <div class="team-intro">
+    <img class="intro_img" src="../../../src/assets/pics/team/intro_image.png" alt="team intro sundspace">
+  </div>
   <div class="team-view">
     <div class="tag-filters">
       <div class="tag-container">
@@ -76,7 +78,18 @@ export default {
     },
     closeOverlay() {
       this.selectedMember = null;
+    },
+    sortAndAssignIds(members) {
+      return members
+        .sort((a, b) => a.name.localeCompare(b.name)) // Sortiere alphabetisch nach Name
+        .map((member, index) => ({
+          ...member,
+          id: index + 1 // Neue ID zuweisen, beginnend bei 1
+        }));
     }
+  },
+  created() {
+    this.members = this.sortAndAssignIds(members);
   }
 };
 </script>

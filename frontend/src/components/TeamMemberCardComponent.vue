@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     getImagePath(imageName: string | undefined) {
-      console.log(imageName);
       if (!imageName) {
         return new URL('../../../src/assets/pics/logo_schwarz.png', import.meta.url).href;
       } else {
