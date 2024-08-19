@@ -29,12 +29,12 @@ export default {
   data() {
     return {
       showAllTags: false,
-      imageSrc: '' // Placeholder for image URL
+      imageSrc: ''
     };
   },
   computed: {
     visibleTags() {
-      const maxTags = 9; // 3 rows x 3 tags per row
+      const maxTags = 9;
       return this.showAllTags ? this.member.tags : this.member.tags.slice(0, maxTags);
     },
     hasMoreTags() {
@@ -45,7 +45,6 @@ export default {
     getImagePath(imageName: string | undefined) {
       console.log(imageName);
       if (!imageName) {
-        // Use placeholder if imageName is undefined or empty
         return new URL('../../../src/assets/pics/logo_schwarz.png', import.meta.url).href;
       } else {
         return new URL(`../../../src/assets/pics/team/${imageName}`, import.meta.url).href;
@@ -79,10 +78,10 @@ export default {
 }
 
 .overlay-content {
-  background: #fff;
+  background: #272727;
   padding: 20px;
   border-radius: 5px;
-  max-width: 1000px; /* Adjust as needed */
+  max-width: 1000px; 
   width: 100%;
   max-height: 80vh;
   display: flex;

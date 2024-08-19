@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       showAllTags: false,
-      imageSrc: '' // Placeholder for the image source URL
+      imageSrc: ''
     };
   },
   computed: {
@@ -46,7 +46,6 @@ export default {
     getImagePath(imageName: string | undefined) {
       console.log(imageName);
       if (!imageName) {
-        // Use placeholder if imageName is undefined or empty
         return new URL('../../../src/assets/pics/logo_schwarz.png', import.meta.url).href;
       } else {
         return new URL(`../../../src/assets/pics/team/${imageName}`, import.meta.url).href;
@@ -64,11 +63,10 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  background-color: #272727;
   transition: transform 0.3s;
   max-width: 300px;
 }

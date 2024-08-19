@@ -2,19 +2,16 @@
   <div class="team-intro"></div>
   <div class="team-view">
     <div class="tag-filters">
-      <div class="tag-container" :class="{ 'expanded': showAllTags }">
+      <div class="tag-container">
         <span
           v-for="(tag, index) in filteredTags"
           :key="index"
-          class="tag"
+          :class="['tag', { 'active-tag': tag === selectedTag }]" 
           @click="selectTag(tag)"
         >
           {{ tag }}
         </span>
       </div>
-      <button v-if="hasMoreTags" @click="toggleTags" class="toggle-tags-btn">
-        {{ showAllTags ? 'Weniger' : 'Mehr' }}
-      </button>
     </div>
     <div class="team-container">
       <TeamMemberCardComponent
@@ -46,14 +43,16 @@ export default {
     return {
       members,
       selectedMember: null,
-      selectedTag: null,
-      showAllTags: false
+      selectedTag: null
     };
   },
   computed: {
     tags() {
       const tagsSet = new Set();
       this.members.forEach(member => {
+        // Rollen hinzufügen
+        tagsSet.add(member.role);
+        // Bestehende Tags hinzufügen
         member.tags.forEach(tag => tagsSet.add(tag));
       });
       return Array.from(tagsSet);
@@ -64,19 +63,13 @@ export default {
     filteredMembers() {
       if (!this.selectedTag) return this.members;
       return this.members.filter(member =>
-        member.tags.includes(this.selectedTag)
+        member.tags.includes(this.selectedTag) || member.role === this.selectedTag
       );
-    },
-    hasMoreTags() {
-      return this.tags.length > 9;
     }
   },
   methods: {
     selectTag(tag) {
       this.selectedTag = this.selectedTag === tag ? null : tag;
-    },
-    toggleTags() {
-      this.showAllTags = !this.showAllTags;
     },
     openOverlay(member) {
       this.selectedMember = member;
@@ -110,14 +103,8 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   gap: 5px;
-  max-height: 65px; /* Approx 3 rows of tags */
-  overflow: hidden;
   margin-left: 100px;
-  margin-right: 100px; /* Space between tags container and button */
-}
-
-.tag-container.expanded {
-  max-height: none; /* Remove height restriction */
+  margin-right: 100px;
 }
 
 .tag {
@@ -129,14 +116,8 @@ export default {
   cursor: pointer;
 }
 
-.toggle-tags-btn {
-  background: none;
-  border: none;
-  color: #007bff;
-  cursor: pointer;
-  font-size: 14px;
-  margin-left: auto; /* Push button to the right */
-  margin-right: 100px;
+.active-tag {
+  background-color: #fddb3a; /* Farbe für aktiven Tag */
 }
 
 .team-container {
