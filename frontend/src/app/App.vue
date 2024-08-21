@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
+import ConfirmationComponent from '../components/ConfirmationComponent.vue';
 import Navbar from '../components/NavBarComponent.vue';
 import Footer from '../components/FooterComponent.vue';
 </script>
@@ -9,6 +10,7 @@ import Footer from '../components/FooterComponent.vue';
     <Navbar></Navbar>
   </header>
   <RouterView />
+  <ConfirmationComponent />
   <div class="breaker"></div>
   <Footer></Footer>
 </template>
