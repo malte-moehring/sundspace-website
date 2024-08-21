@@ -7,6 +7,7 @@
     "test": "nx test"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
     "@nrwl/workspace": "^15.9.3",
     "axios": "^1.7.3",
     "counterjs": "^1.0.1",
