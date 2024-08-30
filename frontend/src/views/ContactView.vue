@@ -1,5 +1,7 @@
 <template>
-  <div class="splash-screen"></div>
+  <div class="splash-screen">
+    <img :src="banner" alt="Sundspace Team Banner">
+  </div>
   <div class="contact-info">
     <h2>Kontaktiere Uns</h2>
     <div class="info-item">
@@ -19,6 +21,7 @@
 
 <script>
 import '@fortawesome/fontawesome-free/css/all.css';
+import banner from '../../../src/assets/pics/pic_one.png';
 
 export default {
   data() {
@@ -26,7 +29,8 @@ export default {
       address: 'Zur Schwedenschanze 15, 18435 Stralsund',
       email: 'sundspace@hochschule-stralsund.de',
       instagramHandle: '@sundspace',
-      instagramLink: 'https://www.instagram.com/sund.space'
+      instagramLink: 'https://www.instagram.com/sund.space',
+      banner
     };
   }
 };
