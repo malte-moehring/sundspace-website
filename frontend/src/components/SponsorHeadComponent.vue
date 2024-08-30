@@ -5,7 +5,7 @@
         "Mut steht am Anfang des Handelns, Glück am Ende." - Demokrit
       </blockquote>
       <p class="description">
-        Mit der Gründung von SUNSPACE konnten wir vielen jungen Menschen die Möglichkeit zu einem ersten Schritt in die Raumfahrt ermöglichen...
+        Mit der Gründung von SUNSPACE möchten wir vielen jungen Menschen die Möglichkeit zu einem ersten Schritt in die Raumfahrt ermöglichen ...
       </p>
     </header>
   </template>
@@ -18,15 +18,19 @@
   
   <style scoped>
   .header {
-    text-align: center;
-    padding: 20px;
-    background: linear-gradient(135deg, #1f1f1f, #292929);
-    color: white;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
   }
   
   .title {
-    font-size: 2.5em;
+    font-weight: bold;
+    font-size: 5em;
     margin-bottom: 10px;
+    color: #fddb3a;
   }
   
   .quote {
