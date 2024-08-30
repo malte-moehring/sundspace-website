@@ -7,7 +7,7 @@
       <h2>Kontaktiere Uns</h2>
       <div class="info-item">
         <i class="fas fa-map-marker-alt"></i>
-        <p>{{ address }}</p>
+        <p><a :href="mapsLink" target="_blank" rel="noopener">{{ address }}</a></p>
       </div>
       <div class="info-item">
         <i class="fas fa-envelope"></i>
@@ -32,6 +32,7 @@ export default {
       email: 'sundspace@hochschule-stralsund.de',
       instagramHandle: '@sundspace',
       instagramLink: 'https://www.instagram.com/sund.space',
+      mapsLink: 'https://www.google.de/maps/place/Zur+Schwedenschanze+15,+18435+Stralsund',
       banner
     };
   }
@@ -63,13 +64,26 @@ export default {
   object-fit: cover; /* Cover the div with the image */
 }
 
+.splash-screen::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30%; /* Control the height of the blur */
+  background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent); /* Adjust colors to blend */
+  filter: blur(10px); /* Adjust blur intensity */
+  pointer-events: none; /* Ensure it doesn't interfere with interactions */
+  z-index: 1; /* Make sure it sits above the image */
+}
+
 .contact-info {
   position: relative; /* This will ensure it stacks above the splash screen */
   max-width: 500px;
   margin: 0 auto;
   top: 45vh;
   padding: 1rem;
-  background-color: rgba(249, 249, 249, 0.9); /* Slight transparency for visual effect */
+  background-color: rgba(39, 39, 39, 0.75); /* Slight transparency for visual effect */
   border-radius: 8px;
   text-align: left;
   z-index: 10; /* Ensure it is above the splash-screen */
@@ -82,10 +96,13 @@ h2 {
   text-align: center;
   margin-bottom: 1.5rem;
   font-weight: bold;
+  font-size: 1.5rem;
+  color: #fddb3a;
 }
 
 .info-item {
   display: flex;
+  justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
 }
