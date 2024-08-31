@@ -6,12 +6,8 @@
         <h3 class="name">{{ member.name }}</h3>
         <p class="role">{{ member.role }}</p>
       </div>
-      <div class="tags-container" :class="{ 'expanded': showAllTags }">
-        <span
-          v-for="(tag, index) in visibleTags"
-          :key="index"
-          class="tag"
-        >
+      <div class="tags-container" :class="{ expanded: showAllTags }">
+        <span v-for="(tag, index) in visibleTags" :key="index" class="tag">
           {{ tag }}
         </span>
       </div>
@@ -24,13 +20,13 @@ export default {
   props: {
     member: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       showAllTags: false,
-      imageSrc: ''
+      imageSrc: '',
     };
   },
   computed: {
@@ -40,20 +36,26 @@ export default {
     },
     hasMoreTags() {
       return this.member.tags.length > 2;
-    }
+    },
   },
   methods: {
     getImagePath(imageName: string | undefined) {
       if (!imageName) {
-        return new URL('../../../src/assets/pics/logo_schwarz.png', import.meta.url).href;
+        return new URL(
+          '../../../src/assets/pics/logo_schwarz.png',
+          import.meta.url
+        ).href;
       } else {
-        return new URL(`../../../src/assets/pics/team/${imageName}`, import.meta.url).href;
+        return new URL(
+          `../../../src/assets/pics/team/${imageName}`,
+          import.meta.url
+        ).href;
       }
-    }
+    },
   },
   created() {
     this.imageSrc = this.getImagePath(this.member.image);
-  }
+  },
 };
 </script>
 
