@@ -68,7 +68,7 @@ export default {
         // Bestehende Tags hinzufügen
         member.tags.forEach((tag) => tagsSet.add(tag));
       });
-      return Array.from(tagsSet);
+      return Array.from(tagsSet).sort((a, b) => a.localeCompare(b));
     },
     filteredTags() {
       return this.tags;
