@@ -8,7 +8,7 @@ import * as THREE from 'three';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 
 // Importiere die .obj-Datei
-import rocketObjUrl from '../../../src/assets/models/new_new_rocket.obj';
+import rocketObjUrl from '../../../src/assets/models/brand_new_rocket.obj';
 
 const rocketContainer = ref<HTMLDivElement | null>(null);
 
@@ -41,7 +41,7 @@ onMounted(() => {
   loader.load(
     rocketObjUrl,
     (object) => {
-      object.scale.set(4, 4, 4); // Adjust scaling as needed
+      object.scale.set(1, 1, 1); // Adjust scaling as needed
       scene.add(object);
 
       // Animation function to rotate the model around the z-axis
@@ -63,7 +63,7 @@ onMounted(() => {
 
   // Set the camera position and view
   camera.position.z = 200; // Move camera back to see the model
-  camera.position.y = 100; // Adjust the vertical position to get a better view
+  camera.position.y = 0; // Adjust the vertical position to get a better view
   camera.position.x = 0;   // Center camera horizontally
 
   // Adjust the camera to look at the center of the model
