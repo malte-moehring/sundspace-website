@@ -1,73 +1,152 @@
 <template>
-  <div class="team-container">
-    <div 
-      class="team-member" 
-      v-for="(member, index) in team" 
-      :key="index" 
-      :class="{ 'odd-row': isOddRow(index) }"
-    >
-      <img :src="member.image" alt="team member" />
-      <h3>{{ member.name }}</h3>
-      <p>{{ member.role }}</p>
-      <div class="tags">
-        <span v-for="(tag, tagIndex) in member.tags" :key="tagIndex" class="tag">{{ tag }}</span>
+  <div class="team-intro">
+    <img class="intro_img" :src="introImage" alt="team intro sundspace" />
+    <p>
+      Zentrale Bedeutung des Vereins ist eine effiziente Systementwicklung, an
+      der sowohl die Studierenden als auch die Professoren und Professorinnen
+      der Hochschule Stralsund beteiligt sind.
+      <br />
+      Dazu befolgt das Team eine Koordinationsstrategie, in der die
+      Aufgabenbereiche in den jeweiligen Abteilungen Elektrotechnik und
+      Informatik, Maschinenbau und Management unterteilt werden.
+    </p>
+  </div>
+  <div class="team-view">
+    <div class="tag-filters">
+      <div class="tag-container">
+        <span
+          v-for="(tag, index) in filteredTags"
+          :key="index"
+          :class="['tag', { 'active-tag': tag === selectedTag }]"
+          @click="selectTag(tag)"
+        >
+          {{ tag }}
+        </span>
       </div>
+    </div>
+    <div class="team-container">
+      <TeamMemberCardComponent
+        v-for="member in filteredMembers"
+        :key="member.id"
+        :member="member"
+        @click="openOverlay(member)"
+      />
+      <ProfileOverlay
+        v-if="selectedMember"
+        :member="selectedMember"
+        @close="closeOverlay"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import TeamMemberCardComponent from '../components/TeamMemberCardComponent.vue';
+import ProfileOverlay from '../components/TeamMemberOverlayComponent.vue';
+import members from '../../../src/assets/json/members.json';
+import introImage from '../../../src/assets/pics/team/intro_image.png';
+
 export default {
+  components: {
+    TeamMemberCardComponent,
+    ProfileOverlay,
+  },
   data() {
     return {
-      team: [
-        { name: 'Alice Müller', role: 'Frontend Developer', image: 'path/to/image1.jpg', tags: ['Frontend', 'Vue.js'] },
-        { name: 'Bob Schmidt', role: 'Backend Developer', image: 'path/to/image2.jpg', tags: ['Backend', 'Node.js'] },
-        { name: 'Carla Weber', role: 'UX/UI Designer', image: 'path/to/image3.jpg', tags: ['Design', 'UX/UI'] },
-        { name: 'David Becker', role: 'Project Manager', image: 'path/to/image4.jpg', tags: ['Management', 'Scrum'] },
-        { name: 'Eva Lange', role: 'Data Scientist', image: 'path/to/image5.jpg', tags: ['Data', 'Machine Learning'] },
-        { name: 'Frank Meyer', role: 'DevOps Engineer', image: 'path/to/image6.jpg', tags: ['DevOps', 'Cloud'] },
-      ],
+      members,
+      selectedMember: null,
+      selectedTag: null,
+      introImage,
     };
   },
-  methods: {
-    isOddRow(index) {
-      return Math.floor(index / 3) % 2 === 1;
+  computed: {
+    tags() {
+      const tagsSet = new Set();
+      this.members.forEach((member) => {
+        // Rollen hinzufügen
+        tagsSet.add(member.role);
+        // Bestehende Tags hinzufügen
+        member.tags.forEach((tag) => tagsSet.add(tag));
+      });
+      return Array.from(tagsSet).sort((a, b) => a.localeCompare(b));
     },
+    filteredTags() {
+      return this.tags;
+    },
+    filteredMembers() {
+      if (!this.selectedTag) return this.members;
+      return this.members.filter(
+        (member) =>
+          member.tags.includes(this.selectedTag) ||
+          member.role === this.selectedTag
+      );
+    },
+  },
+  methods: {
+    selectTag(tag) {
+      this.selectedTag = this.selectedTag === tag ? null : tag;
+    },
+    openOverlay(member) {
+      this.selectedMember = member;
+    },
+    closeOverlay() {
+      this.selectedMember = null;
+    },
+    sortAndAssignIds(members) {
+      return members
+        .sort((a, b) => a.name.localeCompare(b.name)) // Sortiere alphabetisch nach Name
+        .map((member, index) => ({
+          ...member,
+          id: index + 1, // Neue ID zuweisen, beginnend bei 1
+        }));
+    },
+  },
+  created() {
+    this.members = this.sortAndAssignIds(members);
   },
 };
 </script>
 
 <style scoped>
-.team-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  grid-auto-rows: minmax(100px, auto);
-}
-
-.team-member {
+.team-intro {
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: #fff;
+  justify-content: center;
 }
 
-.team-member img {
-  width: 100%;
+.team-intro p {
+  color: #fff;
+  padding: 20px;
+  font-size: 24;
+  font-style: italic;
+  max-width: 30rem;
+}
+
+.intro_img {
+  width: 45rem;
   height: auto;
-  border-radius: 5px;
 }
 
-.tags {
+.team-view {
+  padding: 20px;
+}
+
+.tag-filters {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.tag-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 5px;
-  margin-top: 10px;
+  margin-left: 75px;
+  margin-right: 75px;
 }
 
 .tag {
@@ -75,10 +154,27 @@ export default {
   color: #fff;
   padding: 2px 5px;
   border-radius: 3px;
-  font-size: 12px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.odd-row {
-  margin-top: 20px; /* Adjust this value to achieve the desired offset */
+.active-tag {
+  background-color: #fddb3a; /* Farbe für aktiven Tag */
+}
+
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.team-member-card {
+  transition: transform 0.3s;
+}
+
+.team-member-card:hover {
+  transform: scale(1.03);
 }
 </style>
