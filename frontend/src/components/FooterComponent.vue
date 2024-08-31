@@ -25,7 +25,7 @@
             >
           </li>
           <li>
-            <router-link to="/datenschutzerklärung" exact-active-class="active"
+            <router-link to="/datenschutzerklaerung" exact-active-class="active"
               >Datenschutzerklärung</router-link
             >
           </li>

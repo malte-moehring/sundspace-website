@@ -39,8 +39,8 @@ const routes: Array<RouteRecordRaw> = [
     component: () => import('../views/ImprintView.vue'),
   },
   {
-    path: '/datenschutzerklärung',
-    name: 'datenschutzerklärung',
+    path: '/datenschutzerklaerung',
+    name: 'datenschutzerklaerung',
     component: () => import('../views/PrivacyPolicyView.vue'),
   },
 ];
