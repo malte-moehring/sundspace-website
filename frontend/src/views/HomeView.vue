@@ -5,31 +5,15 @@
         <Counter />
         <!-- Verwende die Counter-Komponente -->
       </div>
-      <div
-        v-for="(feed, index) in feeds"
-        :key="index"
-        :class="`feed-${index + 1}`"
-      >
-        <img :src="getImagePath(feed.image)" :alt="`Feed ${index + 1}`" />
-        <div
-          :class="[
-            'card',
-            index % 2 === 0 ? 'yellow' : 'purple',
-            isExpanded[index] ? 'expanded' : '',
-          ]"
-        >
-          <p>
-            {{ isExpanded[index] ? feed.text : feed.text.slice(0, 300) }}
-            <span v-if="!isExpanded[index] && feed.text.length > 300">...</span>
-          </p>
-          <button
-            v-if="feed.text.length > 300"
-            class="expand-button"
-            @click="toggleExpand(index)"
-          >
-            {{ isExpanded[index] ? 'Zuklappen' : 'Lies mehr' }}
-          </button>
-        </div>
+      <div class="feed-container">
+        <FeedItem
+          v-for="(feed, index) in feeds"
+          :key="index"
+          :feed="feed"
+          :index="index"
+          :is-expanded="isExpanded[index]"
+          @toggle-expand="toggleExpand(index)"
+        />
       </div>
       <div class="footer">
         <a
@@ -41,7 +25,7 @@
         >
       </div>
       <div class="rocket-element">
-        <Rocket></Rocket>
+        <Rocket />
       </div>
     </div>
   </main>
@@ -51,9 +35,10 @@
 import { ref } from 'vue';
 import Counter from '../components/CounterComponent.vue';
 import feedData from '../../../src/assets/json/feed.json';
+import FeedItem from '../components/FeedItemComponent.vue'; // Neue Komponente für die Feed-Elemente
+import Rocket from '../components/RocketComponent.vue';
 
 const feeds = ref(feedData);
-
 const isExpanded = ref(new Array(feeds.value.length).fill(false));
 
 // Dynamischer Import der Bilder basierend auf dem Bildnamen
@@ -64,176 +49,67 @@ const getImagePath = (imageName: string) => {
 const toggleExpand = (index: number) => {
   isExpanded.value[index] = !isExpanded.value[index];
 };
-import Rocket from '../components/RocketComponent.vue';
 </script>
 
-<style scoped lang="css">
-Rocket {
-  height: 100%;
-}
-
-img {
-  max-width: 80%; /* Bild füllt den verfügbaren Platz in der Karte */
-  max-height: 80%;
-  border-radius: 20px; /* Rundet alle Ecken des Bildes */
-  object-fit: cover; /* Das Bild wird so angepasst, dass es den Container ausfüllt */
-  z-index: 1;
-  position: relative;
-}
-
-p {
-  padding: 20px;
-  color: black;
-}
-
+<style scoped>
 .parent {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(7, auto);
-  gap: 8px;
-}
-
-.parent div {
-  color: #dadada;
+  grid-auto-rows: auto; /* Automatische Anpassung der Zeilenhöhe */
+  gap: 16px; /* Abstand zwischen den Elementen */
 }
 
 .splash-screen {
-  grid-column: span 3 / span 3;
+  grid-column: span 3;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.feed-1 {
-  position: relative;
-  grid-column: span 2 / span 2;
-  grid-row-start: 2;
-  margin-left: 10rem;
-  margin-bottom: 5rem;
-}
-
-.feed-2 {
-  position: relative;
-  grid-column: span 2 / span 2;
-  grid-column-start: 1;
-  grid-row-start: 3;
-  margin-left: 10rem;
-  margin-bottom: 5rem;
-}
-
-.feed-3 {
-  position: relative;
-  grid-column: span 2 / span 2;
-  grid-column-start: 1;
-  grid-row-start: 4;
-  margin-left: 10rem;
-  margin-bottom: 5rem;
-}
-
-.feed-4 {
-  position: relative;
-  grid-column: span 2 / span 2;
-  grid-column-start: 1;
-  grid-row-start: 5;
-  margin-left: 10rem;
-  margin-bottom: 5rem;
-}
-
-.feed-5 {
-  position: relative;
-  grid-column: span 2 / span 2;
-  grid-column-start: 1;
-  grid-row-start: 6;
-  margin-left: 10rem;
+.feed-container {
+  grid-column: span 2; /* Die Feed-Elemente sollen auf 2 Spalten bleiben */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Abstand zwischen den Feed-Items */
 }
 
 .footer {
-  grid-column: span 3 / span 3;
-  grid-column-start: 1;
-  grid-row-start: 7;
-  display: flex; /* Flexbox verwenden */
-  justify-content: center; /* Zentrieren des Inhalts horizontal */
-  align-items: center; /* Zentrieren des Inhalts vertikal */
-  height: 100px; /* Stellen Sie sicher, dass der Container genügend Höhe hat */
+  grid-column: span 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
 }
 
 .rocket-element {
-  grid-row: span 5 / span 5;
-  grid-column-start: 3;
-  grid-row-start: 2;
-  width: 100%;
-  height: auto;
+  grid-column: 3; /* Die Rakete bleibt in der dritten Spalte */
+  grid-row: 2 / span 5; /* Die Rakete erstreckt sich vertikal über den Feed */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   max-width: 25vw;
-  z-index: 0;
   overflow: hidden;
-}
-
-.rocket-element div {
-  width: 100%;
-  height: 100%;
-}
-
-.card {
-  position: absolute;
-  border-radius: 20px;
-  padding-right: 20px; /* Optionales Padding rechts für Symmetrie */
-  margin-left: 5rem; /* Setzt den linken Rand zurück */
-  width: calc(
-    100% - 10rem
-  ); /* Breite des Bildes anpassen, um das Padding zu berücksichtigen */
-  margin-top: -2.5rem;
-  z-index: 999;
-  overflow: hidden;
-  max-height: 150px;
-}
-
-.card.expanded {
-  max-height: none;
-}
-
-.truncated {
-  display: block;
-  max-height: 120px;
-  overflow: hidden;
-}
-
-.expand-button {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: transparent;
-  border: 0;
-  padding: 5px 10px;
-  cursor: pointer;
-  z-index: 1000;
-  color: blue;
+  position: sticky; /* Die Rakete bleibt fixiert */
+  top: 20px; /* Die Rakete bleibt mit einem kleinen Abstand vom oberen Rand */
 }
 
 .insta-button {
-  display: inline-flex; /* Flexbox verwenden, um Button-Styling zu ermöglichen */
-  align-items: center; /* Zentrieren des Textes vertikal */
-  justify-content: center; /* Zentrieren des Textes horizontal */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: blueviolet;
-  border: none; /* Entfernen der Standard-Border */
+  border: none;
   border-radius: 20px;
   width: 150px;
   height: 50px;
   color: black;
-  font-size: 16px; /* Größe des Textes */
-  text-align: center; /* Text im Button zentrieren */
-  text-decoration: none; /* Entfernt Unterstreichung vom Link */
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
 }
 
 .insta-button:hover {
   background-color: #fddb3a;
-}
-
-.yellow {
-  background-color: #fddb3a;
-}
-
-.purple {
-  background-color: blueviolet;
 }
 </style>

@@ -2,36 +2,61 @@
   <div id="app">
     <SponsorHeadComponent />
     <SponsorshipPackages :packages="packages" />
-    <Benefits :benefits="benefits" :packages="packages" />
-    <ContactFormComponent />
+    <ContactComponent />
   </div>
 </template>
 
 <script>
 import SponsorHeadComponent from '../components/SponsorHeadComponent.vue';
 import SponsorshipPackages from '../components/SponsorshipPackages.vue';
-import Benefits from '../components/Benefits.vue';
-import ContactFormComponent from '../components/ContactFormComponent.vue';
+import ContactComponent from '../components/ContactComponent.vue';
 
 export default {
   name: 'App',
   data() {
     return {
       packages: [
-        { name: 'SUPER HEAVY', price: 'größer 5.000 €', benefits: ['Logo Promo', 'Website', 'Social Media', 'Hoody', 'Logo Rakete'] },
-        { name: 'GOLD', price: '2.000 bis 5.000 €', benefits: ['Logo Promo', 'Website', 'Social Media', 'Hoody'] },
-        { name: 'SILBER', price: '1.000 bis 2.000 €', benefits: ['Logo Promo', 'Website'] },
-        { name: 'BRONZE', price: 'Know-How / 1.000 € / Produkte zum Test', benefits: [] }
+        {
+          name: 'SUPER HEAVY',
+          price: 'größer 5.000 €',
+          benefits: [
+            'Logo Promo',
+            'Website',
+            'Social Media',
+            'Hoody',
+            'Logo Rakete',
+          ],
+        },
+        {
+          name: 'GOLD',
+          price: '2.000 bis 5.000 €',
+          benefits: ['Logo Promo', 'Website', 'Social Media', 'Hoody'],
+        },
+        {
+          name: 'SILBER',
+          price: '1.000 bis 2.000 €',
+          benefits: ['Logo Promo', 'Website'],
+        },
+        {
+          name: 'BRONZE',
+          price: 'Know-How / 1.000 € / Produkte zum Test',
+          benefits: [],
+        },
       ],
-      benefits: ['Logo Promo', 'Website', 'Social Media', 'Hoody', 'Logo Rakete']
+      benefits: [
+        'Logo Promo',
+        'Website',
+        'Social Media',
+        'Hoody',
+        'Logo Rakete',
+      ],
     };
   },
   components: {
     SponsorHeadComponent,
     SponsorshipPackages,
-    Benefits,
-    ContactFormComponent
-  }
+    ContactComponent,
+  },
 };
 </script>
 
