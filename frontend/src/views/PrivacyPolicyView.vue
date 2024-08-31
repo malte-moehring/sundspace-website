@@ -1,15 +1,21 @@
-<template>
+  <template>
+    <!-- A placeholder to add space or separate content visually -->
     <div class="breaker"></div>
+
+    <!-- Container for displaying the privacy policy text with formatted content -->
     <div class="text-container" v-html="formattedTextContent"></div>
-  </template>
+</template>
+
+<script>
+export default {
+  // Component name for referencing this component elsewhere in the application
+  name: 'TextDisplay',
   
-  <script>
-  export default {
-    name: 'TextDisplay',
-    data() {
-      return {
-        formattedTextContent: `
-          <p class="demoTitle">&nbsp;</p>
+  data() {
+    return {
+      // This will hold the formatted HTML content of the privacy policy
+      formattedTextContent: `
+      <p class="demoTitle">&nbsp;</p>
 <h2 class="wp-block-heading">1. Datenschutz auf einen Blick</h2>
 <h3 class="wp-block-heading">Allgemeine Hinweise</h3>
 <p>Die folgenden Hinweise geben einen einfachen &Uuml;berblick dar&uuml;ber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie pers&ouml;nlich identifiziert werden k&ouml;nnen. Ausf&uuml;hrliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgef&uuml;hrten Datenschutzerkl&auml;rung.</p>
@@ -80,42 +86,47 @@
 <p>Die von Ihnen an uns per Kontaktanfragen &uuml;bersandten Daten verbleiben bei uns, bis Sie uns zur L&ouml;schung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck f&uuml;r die Datenspeicherung entf&auml;llt (z.&nbsp;B. nach abgeschlossener Bearbeitung Ihres Anliegens). Zwingende gesetzliche Bestimmungen &ndash; insbesondere gesetzliche Aufbewahrungsfristen &ndash; bleiben unber&uuml;hrt.</p>
 <p>Quelle: <a href="https://www.e-recht24.de">https://www.e-recht24.de</a></p>
 <!-- Comments are visible in the HTML source only -->
-        `
-      }
+      `
     }
   }
-  </script>
-  
-  <style scoped>
+}
+</script>
+
+<style scoped>
+/* Styling for the spacer element to create vertical space */
 .breaker {
     height: 10rem;
 }
 
-  .text-container {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-    font-family: Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #dadada;
-  }
-  
-  .text-container p {
-    margin: 1em 0;
-  }
-  
-  .text-container ul {
-    padding-left: 20px;
-  }
-  
-  .text-container a {
-    color: #007BFF;
-    text-decoration: underline;
-  }
-  
-  .text-container a:hover {
-    text-decoration: underline;
-  }
-  </style>
-  
+/* Styling for the text container that displays the privacy policy content */
+.text-container {
+    padding: 20px; /* Adds padding inside the container for spacing */
+    max-width: 800px; /* Sets the maximum width of the container */
+    margin: 0 auto; /* Centers the container horizontally */
+    font-family: Arial, sans-serif; /* Sets the font for the text */
+    font-size: 16px; /* Sets the font size for readability */
+    line-height: 1.5; /* Increases line height for better text readability */
+    color: #dadada; /* Sets the text color */
+}
+
+/* Styling for paragraph elements within the text container */
+.text-container p {
+    margin: 1em 0; /* Adds vertical margin to paragraphs for spacing */
+}
+
+/* Styling for unordered lists within the text container */
+.text-container ul {
+    padding-left: 20px; /* Adds padding to the left of lists for indentation */
+}
+
+/* Styling for anchor tags (links) within the text container */
+.text-container a {
+    color: #007BFF; /* Sets the color of links */
+    text-decoration: underline; /* Underlines the links */
+}
+
+/* Styling for anchor tags (links) on hover */
+.text-container a:hover {
+    text-decoration: underline; /* Ensures the underline remains on hover */
+}
+</style>

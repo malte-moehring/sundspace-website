@@ -1,5 +1,6 @@
 <template>
   <main>
+    <!-- Container for the general information about the rocket -->
     <div class="rocket-info">
       <h2>Siren</h2>
       <p>
@@ -38,7 +39,10 @@
         leisten zu können.
       </p>
     </div>
+
+    <!-- Container for additional elements related to the rocket -->
     <div class="parent">
+      <!-- Section describing the parachute system -->
       <div class="parachute info-element">
         <h2>Fallschirm</h2>
         <div class="line"></div>
@@ -55,6 +59,8 @@
           Sicherheit der Nutzlast zu gewährleisten.
         </p>
       </div>
+
+      <!-- Section describing the rocket’s electronics -->
       <div class="electronics info-element">
         <h2>Elektronik</h2>
         <div class="line"></div>
@@ -74,6 +80,8 @@
           funktionieren.
         </p>
       </div>
+
+      <!-- Section describing the rocket engine -->
       <div class="engine info-element">
         <h2>Triebwerk</h2>
         <div class="line"></div>
@@ -95,6 +103,8 @@
           bietet.
         </p>
       </div>
+
+      <!-- Placeholder for a Rocket component -->
       <div class="rocket-element">
         <Rocket></Rocket>
       </div>
@@ -107,97 +117,107 @@ import Rocket from '../components/RocketComponent.vue';
 </script>
 
 <style scoped lang="css">
+/* Styling for the general rocket information section */
 .rocket-info {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
+  width: 100vw; /* Full viewport width */
+  height: 100vh; /* Full viewport height */
+  display: flex; /* Flexbox layout */
+  align-items: center; /* Center items vertically */
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center items horizontally */
 }
 
+/* Styling for information elements with padding */
 .info-element {
-  padding-bottom: 10rem;
+  padding-bottom: 10rem; /* Bottom padding for spacing */
 }
 
+/* Styling for headings and paragraphs in rocket-info section */
 .rocket-info h2,
 .rocket-info p {
-  color: #dadada;
-  padding-left: 10rem;
-  padding-right: 10rem;
-  text-align: center;
+  color: #dadada; /* Text color */
+  padding-left: 10rem; /* Left padding for alignment */
+  padding-right: 10rem; /* Right padding for alignment */
+  text-align: center; /* Center-align text */
 }
 
+/* Styling for headings in rocket-info section */
 .rocket-info h2 {
-  padding-top: 10rem;
-  font-weight: bold;
-  font-size: 48px;
+  padding-top: 10rem; /* Top padding */
+  font-weight: bold; /* Bold font weight */
+  font-size: 48px; /* Font size */
 }
 
+/* Styling for paragraphs in rocket-info section */
 .rocket-info p {
-  padding-bottom: 10rem;
-  font-style: italic;
+  padding-bottom: 10rem; /* Bottom padding */
+  font-style: italic; /* Italic font style */
 }
 
+/* Styling for the parent container, using grid layout */
 .parent {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
-  gap: 8px;
-  height: auto;
+  display: grid; /* Grid layout */
+  grid-template-columns: repeat(3, 1fr); /* Three equal-width columns */
+  grid-template-rows: repeat(3, 1fr); /* Three equal-height rows */
+  gap: 8px; /* Gap between grid items */
+  height: auto; /* Auto height */
 }
 
+/* Styling for headings and paragraphs in parent container sections */
 .parent div h2 {
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #fddb3a;
-  padding-left: 5rem;
-  font-size: 24px;
+  font-weight: bold; /* Bold font weight */
+  text-transform: uppercase; /* Uppercase text */
+  color: #fddb3a; /* Heading color */
+  padding-left: 5rem; /* Left padding */
+  font-size: 24px; /* Font size */
 }
 
 .parent div p {
-  color: #dadada;
-  padding-left: 7.5rem;
-  padding-top: 1.5rem;
-  padding-right: 5rem;
+  color: #dadada; /* Paragraph color */
+  padding-left: 7.5rem; /* Left padding */
+  padding-top: 1.5rem; /* Top padding */
+  padding-right: 5rem; /* Right padding */
 }
 
+/* Specific grid item styling */
 .parachute {
-  grid-column: span 2 / span 2;
+  grid-column: span 2 / span 2; /* Span two columns */
 }
 
 .electronics {
-  grid-column: span 2 / span 2;
-  grid-column-start: 1;
-  grid-row-start: 2;
+  grid-column: span 2 / span 2; /* Span two columns */
+  grid-column-start: 1; /* Start from the first column */
+  grid-row-start: 2; /* Start from the second row */
 }
 
 .engine {
-  grid-column: span 2 / span 2;
-  grid-column-start: 1;
-  grid-row-start: 3;
+  grid-column: span 2 / span 2; /* Span two columns */
+  grid-column-start: 1; /* Start from the first column */
+  grid-row-start: 3; /* Start from the third row */
 }
 
 .rocket-element {
-  grid-row: span 3 / span 3;
-  grid-column-start: 3;
-  grid-row-start: 1;
-  width: 100%;
-  max-width: 25vw;
-  z-index: 1;
-  overflow: hidden;
+  grid-row: span 3 / span 3; /* Span three rows */
+  grid-column-start: 3; /* Start from the third column */
+  grid-row-start: 1; /* Start from the first row */
+  width: 100%; /* Full width */
+  max-width: 25vw; /* Maximum width of 25% of the viewport width */
+  z-index: 1; /* Layer order */
+  overflow: hidden; /* Hide overflow content */
 }
 
+/* Styling for the line element */
 .line {
-  position: relative;
-  left: 10vw;
-  height: 2px;
-  background-color: #fddb3a;
-  z-index: 2;
+  position: relative; /* Relative positioning */
+  left: 10vw; /* Left offset */
+  height: 2px; /* Line height */
+  background-color: #fddb3a; /* Line color */
+  z-index: 2; /* Layer order */
 }
 
+/* Styling for the Rocket component placeholder */
 Rocket {
-  height: 100%;
-  overflow: hidden;
+  height: 100%; /* Full height */
+  overflow: hidden; /* Hide overflow content */
 }
 </style>
