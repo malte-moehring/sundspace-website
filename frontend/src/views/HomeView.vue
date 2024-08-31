@@ -1,11 +1,13 @@
 <template>
   <main>
     <div class="parent">
+      <!-- Splash screen section that includes Hyperdrive and Counter components -->
       <div class="splash-screen">
         <Hyperdrive></Hyperdrive>
         <Counter />
-        <!-- Verwende die Counter-Komponente -->
+        <!-- Render the Counter component -->
       </div>
+      <!-- Feed container displaying a list of FeedItem components -->
       <div class="feed-container">
         <FeedItem
           v-for="(feed, index) in feeds"
@@ -16,15 +18,18 @@
           @toggle-expand="toggleExpand(index)"
         />
       </div>
+      <!-- Footer section with a link to Instagram -->
       <div class="footer">
         <a
           class="insta-button"
           href="https://www.instagram.com/sund.space/"
           target="_blank"
           rel="noopener noreferrer"
-          >Mehr Neuigkeiten</a
         >
+          Mehr Neuigkeiten
+        </a>
       </div>
+      <!-- Rocket element that remains fixed on the page -->
       <div class="rocket-element">
         <Rocket />
       </div>
@@ -33,21 +38,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import Counter from '../components/CounterComponent.vue';
-import feedData from '../../../src/assets/json/feed.json';
-import FeedItem from '../components/FeedItemComponent.vue'; // Neue Komponente für die Feed-Elemente
-import Rocket from '../components/RocketComponent.vue';
-import Hyperdrive from '../components/HyperdriveComponent.vue';
+import { ref } from 'vue'; // Import Vue's ref function for reactive variables
+import Counter from '../components/CounterComponent.vue'; // Import Counter component
+import feedData from '../../../src/assets/json/feed.json'; // Import feed data from a JSON file
+import FeedItem from '../components/FeedItemComponent.vue'; // Import FeedItem component
+import Rocket from '../components/RocketComponent.vue'; // Import Rocket component
+import Hyperdrive from '../components/HyperdriveComponent.vue'; // Import Hyperdrive component
 
-const feeds = ref(feedData);
-const isExpanded = ref(new Array(feeds.value.length).fill(false));
+// Define reactive variables
+const feeds = ref(feedData); // Feed items data
+const isExpanded = ref(new Array(feeds.value.length).fill(false)); // Track expanded state of feed items
 
-// Dynamischer Import der Bilder basierend auf dem Bildnamen
+// Function to get the path of images dynamically
 const getImagePath = (imageName: string) => {
   return new URL(`../../../src/assets/pics/${imageName}`, import.meta.url).href;
 };
 
+// Function to toggle the expanded state of a feed item
 const toggleExpand = (index: number) => {
   isExpanded.value[index] = !isExpanded.value[index];
 };
@@ -55,64 +62,70 @@ const toggleExpand = (index: number) => {
 
 <style scoped>
 .parent {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-auto-rows: auto; /* Automatische Anpassung der Zeilenhöhe */
-  gap: 16px; /* Abstand zwischen den Elementen */
+  display: grid; /* Use CSS Grid for layout */
+  grid-template-columns: repeat(3, 1fr); /* Create three equal columns */
+  grid-auto-rows: auto; /* Automatically adjust row height */
+  gap: 16px; /* Space between grid items */
 }
 
+/* Styling for the splash screen section, covering the full viewport height */
 .splash-screen {
-  grid-column: span 3;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: transparent;
+  grid-column: span 3; /* Span across all three columns */
+  height: 100vh; /* Full viewport height */
+  display: flex; /* Flexbox layout for centering content */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  background: transparent; /* Transparent background */
 }
 
+/* Styling for the container holding feed items */
 .feed-container {
-  grid-column: span 2; /* Die Feed-Elemente sollen auf 2 Spalten bleiben */
-  display: flex;
-  flex-direction: column;
-  gap: 16px; /* Abstand zwischen den Feed-Items */
+  grid-column: span 2; /* Span across the first two columns */
+  display: flex; /* Flexbox layout for column direction */
+  flex-direction: column; /* Arrange feed items in a column */
+  gap: 16px; /* Space between feed items */
 }
 
+/* Styling for the footer section */
 .footer {
-  grid-column: span 3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100px;
+  grid-column: span 3; /* Span across all three columns */
+  display: flex; /* Flexbox layout for centering content */
+  justify-content: center; /* Center content horizontally */
+  align-items: center; /* Center content vertically */
+  height: 100px; /* Fixed height */
 }
 
+/* Styling for the rocket element that stays fixed in the viewport */
 .rocket-element {
-  grid-column: 3; /* Die Rakete bleibt in der dritten Spalte */
-  grid-row: 2 / span 5; /* Die Rakete erstreckt sich vertikal über den Feed */
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  max-width: 25vw;
-  overflow: hidden;
-  position: sticky; /* Die Rakete bleibt fixiert */
-  top: 20px; /* Die Rakete bleibt mit einem kleinen Abstand vom oberen Rand */
+  grid-column: 3; /* Position in the third column */
+  grid-row: 2 / span 5; /* Span vertically from row 2 to 5 */
+  display: flex; /* Flexbox layout for centering content */
+  justify-content: center; /* Center content horizontally */
+  align-items: flex-start; /* Align content at the top */
+  max-width: 25vw; /* Maximum width relative to viewport width */
+  overflow: hidden; /* Hide overflow */
+  position: sticky; /* Sticky positioning to stay in view */
+  top: 20px; /* Offset from the top of the viewport */
 }
 
+/* Styling for the Instagram button */
 .insta-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background-color: blueviolet;
-  border: none;
-  border-radius: 20px;
-  width: 150px;
-  height: 50px;
-  color: black;
-  font-size: 16px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+  display: inline-flex; /* Flexbox layout for alignment */
+  align-items: center; /* Center content vertically */
+  justify-content: center; /* Center content horizontally */
+  background-color: blueviolet; /* Background color */
+  border: none; /* Remove border */
+  border-radius: 20px; /* Rounded corners */
+  width: 150px; /* Fixed width */
+  height: 50px; /* Fixed height */
+  color: black; /* Text color */
+  font-size: 16px; /* Font size */
+  text-decoration: none; /* Remove underline */
+  transition: background-color 0.3s ease; /* Smooth transition for background color change */
 }
 
+/* Hover effect for the Instagram button */
 .insta-button:hover {
-  background-color: #fddb3a;
+  background-color: #fddb3a; /* Change background color on hover */
 }
 </style>

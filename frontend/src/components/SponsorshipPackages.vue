@@ -1,14 +1,20 @@
 <template>
+  <!-- Section for displaying sponsorship packages -->
   <section class="packages">
+    <!-- Title for the section -->
     <h2 class="section-title">Unsere Sponsoring-Pakete</h2>
     <div class="package-list">
+      <!-- Loop through each package item and render a card for each -->
       <div
         v-for="(packageItem, index) in packages"
         :key="index"
         class="package-card"
       >
+        <!-- Title of the package -->
         <h3 class="package-title">{{ packageItem.name }}</h3>
+        <!-- Price of the package -->
         <p class="package-price">{{ packageItem.price }}</p>
+        <!-- List of benefits included in the package -->
         <ul class="package-benefits">
           <li v-for="(benefit, idx) in packageItem.benefits" :key="idx">
             {{ benefit }}
@@ -21,69 +27,80 @@
 
 <script>
 export default {
-  name: 'SponsorshipPackages',
+  name: 'SponsorshipPackages', // Name of the component
   props: {
+    // Array of packages to be passed as a prop
     packages: Array,
   },
 };
 </script>
 
 <style scoped>
+/* Styling for the packages section */
 .packages {
-  padding: 40px 20px;
-  color: #dadada;
-  background-color: black;
+  padding: 40px 20px; /* Padding around the section */
+  color: #dadada; /* Text color */
+  background-color: black; /* Background color of the section */
 }
 
+/* Styling for the section title */
 .section-title {
-  text-align: center;
-  font-size: 2em;
-  margin-bottom: 20px;
-  color: #fddb3a;
+  text-align: center; /* Center the title text */
+  font-size: 2em; /* Font size for the title */
+  margin-bottom: 20px; /* Space below the title */
+  color: #fddb3a; /* Color of the title text */
 }
 
+/* Container for the list of package cards */
 .package-list {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: flex; /* Flexbox layout for horizontal alignment */
+  flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+  justify-content: center; /* Center items horizontally */
 }
 
+/* Styling for each package card */
 .package-card {
-  background-color: #272727;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  margin: 10px;
-  padding: 20px;
-  width: 300px;
-  transition: transform 0.3s ease;
+  background-color: #272727; /* Background color of the card */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Shadow effect */
+  margin: 10px; /* Space around the card */
+  padding: 20px; /* Padding inside the card */
+  width: 300px; /* Fixed width for the card */
+  transition: transform 0.3s ease; /* Smooth scaling effect on hover */
 }
 
+/* Hover effect for package cards */
 .package-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Scale up the card slightly */
 }
 
+/* Styling for the package title */
 .package-title {
-  font-size: 1.5em;
-  margin-bottom: 10px;
+  font-size: 1.5em; /* Font size for the title */
+  margin-bottom: 10px; /* Space below the title */
 }
 
+/* Styling for the package price */
 .package-price {
-  color: blueviolet;
-  font-weight: bold;
-  margin-bottom: 15px;
+  color: blueviolet; /* Color for the price text */
+  font-weight: bold; /* Bold text for the price */
+  margin-bottom: 15px; /* Space below the price */
 }
 
+/* Styling for the benefits list */
 .package-benefits {
-  list-style-type: none;
-  padding: 0;
+  list-style-type: none; /* Remove default list styling */
+  padding: 0; /* Remove default padding */
 }
 
+/* Styling for each benefit item */
 .package-benefits li {
-  padding: 5px 0;
-  border-bottom: 1px solid #fddb3a;
+  padding: 5px 0; /* Space above and below each item */
+  border-bottom: 1px solid #fddb3a; /* Bottom border for each item */
 }
 
+/* Remove border for the last benefit item */
 .package-benefits li:last-child {
-  border-bottom: none;
+  border-bottom: none; /* No bottom border for the last item */
 }
 </style>

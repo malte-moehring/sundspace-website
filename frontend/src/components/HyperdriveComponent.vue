@@ -1,12 +1,14 @@
 <template>
+  <!-- Container for the starfield effect -->
   <div class="stars">
+    <!-- Create a star element for each item in the stars array -->
     <div v-for="(star, index) in stars" :key="index"
          class="star"
          :style="{
-           '--x': `${star.x}px`,
-           '--y': `${star.y}px`,
-           '--delay': `${star.delay}s`,
-           '--duration': `${star.duration}s`,
+           '--x': `${star.x}px`, /* Horizontal position of the star */
+           '--y': `${star.y}px`, /* Vertical position of the star */
+           '--delay': `${star.delay}s`, /* Delay before the star animation starts */
+           '--duration': `${star.duration}s`, /* Duration of the star animation */
          }"></div>
   </div>
 </template>
@@ -14,59 +16,67 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 
+// Number of stars to be generated
 const starCount = 100;
+
+// Reactive array to store star properties
 const stars = ref([]);
 
+// Function to generate random properties for stars
 const generateStars = () => {
   for (let i = 0; i < starCount; i++) {
     const star = {
-      x: Math.random() * window.innerWidth,
-      y: Math.random() * window.innerHeight,
-      delay: 0,
-      duration: Math.random() * 1 + 0.25,
+      x: Math.random() * window.innerWidth, // Random horizontal position
+      y: Math.random() * window.innerHeight, // Random vertical position
+      delay: Math.random() * 2, // Random delay before animation starts (0 to 2 seconds)
+      duration: Math.random() * 1 + 0.25, // Random duration of animation (0.25 to 1.25 seconds)
     };
-    stars.value.push(star);
+    stars.value.push(star); // Add star to the array
   }
 };
 
+// Generate stars when the component is mounted
 onMounted(() => {
   generateStars();
 });
 </script>
 
 <style scoped>
+/* Container styles for the starfield effect */
 .stars {
-  position: absolute;
+  position: absolute; /* Position container absolutely to cover the viewport */
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  perspective: 1000px;
-  overflow: hidden;
-  z-index: 5;
+  width: 100%; /* Full width of the viewport */
+  height: 100%; /* Full height of the viewport */
+  perspective: 1000px; /* Create a 3D space for animation */
+  overflow: hidden; /* Hide any overflow */
+  z-index: 5; /* Ensure stars are above other content */
 }
 
+/* Styles for individual stars */
 .star {
-  position: absolute;
-  width: 5px;
-  height: 5px;
-  background-color: white;
-  opacity: 1;
-  transform-origin: center center;
-  border-radius: 50%;
-  left: var(--x);
-  top: var(--y);
-  animation: hyperdrive var(--duration) linear var(--delay) infinite;
+  position: absolute; /* Position stars absolutely within the container */
+  width: 5px; /* Size of the star */
+  height: 5px; /* Size of the star */
+  background-color: white; /* Color of the star */
+  opacity: 1; /* Full opacity */
+  transform-origin: center center; /* Animation origin at the center of the star */
+  border-radius: 50%; /* Make star round */
+  left: var(--x); /* Use CSS variable for horizontal position */
+  top: var(--y); /* Use CSS variable for vertical position */
+  animation: hyperdrive var(--duration) linear var(--delay) infinite; /* Apply animation */
 }
 
+/* Keyframes for the hyperdrive animation */
 @keyframes hyperdrive {
   0% {
-    transform: translateZ(0) scale(2);
-    opacity: 1;
+    transform: translateZ(0) scale(2); /* Initial state: closer and larger */
+    opacity: 1; /* Fully visible */
   }
   100% {
-    transform: translateZ(-1000px) scale(1);
-    opacity: 0;
+    transform: translateZ(-1000px) scale(1); /* Final state: farther away and smaller */
+    opacity: 0; /* Fade out */
   }
 }
 </style>
