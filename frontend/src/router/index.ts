@@ -51,7 +51,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name === "wettbewerb") {
+  if (to.name === 'wettbewerb') {
     store.dispatch('showConfirmation', {
       confirmCallback: () => {
         window.location.href = 'https://www.euroc.pt';

@@ -1,14 +1,28 @@
 <template>
   <!-- The navigation container with dynamic classes based on the component's state -->
-  <div ref="navDiv" class="navDiv" :class="{ expanded: isExpanded, fixed: isFixed }">
+  <div
+    ref="navDiv"
+    class="navDiv"
+    :class="{ expanded: isExpanded, fixed: isFixed }"
+  >
     <nav class="navMenu">
       <!-- RouterLinks define navigation links to different routes within the application -->
-      <RouterLink to="/" exact-active-class="router-link-active" exact>Start</RouterLink>
+      <RouterLink to="/" exact-active-class="router-link-active" exact
+        >Start</RouterLink
+      >
       <RouterLink to="/team" active-class="router-link-active">Team</RouterLink>
-      <RouterLink to="/rakete" active-class="router-link-active">Rakete</RouterLink>
-      <RouterLink to="/wettbewerb" active-class="router-link-active">Wettbewerb</RouterLink>
-      <RouterLink to="/kontakt" active-class="router-link-active">Kontakt</RouterLink>
-      <RouterLink to="/sponsoring" active-class="router-link-active">Sponsoring</RouterLink>
+      <RouterLink to="/rakete" active-class="router-link-active"
+        >Rakete</RouterLink
+      >
+      <RouterLink to="/wettbewerb" active-class="router-link-active"
+        >Wettbewerb</RouterLink
+      >
+      <RouterLink to="/kontakt" active-class="router-link-active"
+        >Kontakt</RouterLink
+      >
+      <RouterLink to="/sponsoring" active-class="router-link-active"
+        >Sponsoring</RouterLink
+      >
       <!-- A div element with the class 'dot', used for highlighting navigation items -->
       <div ref="dot" class="dot"></div>
     </nav>
@@ -35,14 +49,17 @@ export default {
       if (hoveredItem && dot.value) {
         const itemWidth = hoveredItem.offsetWidth;
         const itemPosition = hoveredItem.offsetLeft;
-        dot.value.style.transform = `translateX(${itemPosition + itemWidth / 2}px)`;
+        dot.value.style.transform = `translateX(${
+          itemPosition + itemWidth / 2
+        }px)`;
         dot.value.style.opacity = '1';
       }
     };
 
     // Method to handle the scroll event and adjust navigation state
     const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop;
 
       if (scrollTop > 0) {
         isExpanded.value = true;
@@ -76,7 +93,8 @@ export default {
       });
 
       if (dot.value) {
-        dot.value.style.transition = 'transform 0.2s ease-in-out, opacity 0.2s ease-in-out';
+        dot.value.style.transition =
+          'transform 0.2s ease-in-out, opacity 0.2s ease-in-out';
       }
     });
 

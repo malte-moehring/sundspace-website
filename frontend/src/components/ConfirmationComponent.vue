@@ -1,7 +1,10 @@
 <template>
   <div v-if="showConfirmation" class="overlay">
     <div class="dialog">
-      <p>Wollen Sie auf die Seite des Euroc weitergeleitet werden? Sie verlassen diese Webseite.</p>
+      <p>
+        Wollen Sie auf die Seite des Euroc weitergeleitet werden? Sie verlassen
+        diese Webseite.
+      </p>
       <div class="button-container">
         <button id="confirm" @click="handleConfirm">Seite verlassen</button>
         <button id="deny" @click="handleCancel">Bleib auf der Seite</button>

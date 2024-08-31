@@ -9,7 +9,12 @@
         </div>
         <div class="tags">
           <div class="tags-container">
-            <span v-for="(tag, index) in visibleTags" :key="index" class="tag">{{ tag }}</span>
+            <span
+              v-for="(tag, index) in visibleTags"
+              :key="index"
+              class="tag"
+              >{{ tag }}</span
+            >
           </div>
         </div>
         <p class="description">{{ member.description }}</p>
@@ -23,31 +28,39 @@ export default {
   props: {
     member: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       showAllTags: false,
-      imageSrc: ''
+      imageSrc: '',
     };
   },
   computed: {
     visibleTags() {
       const maxTags = 9;
-      return this.showAllTags ? this.member.tags : this.member.tags.slice(0, maxTags);
+      return this.showAllTags
+        ? this.member.tags
+        : this.member.tags.slice(0, maxTags);
     },
     hasMoreTags() {
       return this.member.tags.length > 9;
-    }
+    },
   },
   methods: {
     getImagePath(imageName: string | undefined) {
       console.log(imageName);
       if (!imageName) {
-        return new URL('../../../src/assets/pics/logo_schwarz.png', import.meta.url).href;
+        return new URL(
+          '../../../src/assets/pics/logo_schwarz.png',
+          import.meta.url
+        ).href;
       } else {
-        return new URL(`../../../src/assets/pics/team/${imageName}`, import.meta.url).href;
+        return new URL(
+          `../../../src/assets/pics/team/${imageName}`,
+          import.meta.url
+        ).href;
       }
     },
     closeOverlay() {
@@ -55,11 +68,11 @@ export default {
     },
     toggleTags() {
       this.showAllTags = !this.showAllTags;
-    }
+    },
   },
   created() {
     this.imageSrc = this.getImagePath(this.member.image);
-  }
+  },
 };
 </script>
 
@@ -81,7 +94,7 @@ export default {
   background: #272727;
   padding: 20px;
   border-radius: 5px;
-  max-width: 1000px; 
+  max-width: 1000px;
   width: 100%;
   max-height: 80vh;
   display: flex;
