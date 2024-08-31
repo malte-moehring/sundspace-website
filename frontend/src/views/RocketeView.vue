@@ -39,7 +39,7 @@
       </p>
     </div>
     <div class="parent">
-      <div class="parachute">
+      <div class="parachute info-element">
         <h2>Fallschirm</h2>
         <div class="line"></div>
         <p>
@@ -55,7 +55,7 @@
           Sicherheit der Nutzlast zu gewährleisten.
         </p>
       </div>
-      <div class="electronics">
+      <div class="electronics info-element">
         <h2>Elektronik</h2>
         <div class="line"></div>
         <p>
@@ -74,7 +74,7 @@
           funktionieren.
         </p>
       </div>
-      <div class="engine">
+      <div class="engine info-element">
         <h2>Triebwerk</h2>
         <div class="line"></div>
         <p>
@@ -114,6 +114,10 @@ import Rocket from '../components/RocketComponent.vue';
   align-items: center;
   flex-direction: column;
   justify-content: center;
+}
+
+.info-element {
+  padding-bottom: 10rem;
 }
 
 .rocket-info h2,
