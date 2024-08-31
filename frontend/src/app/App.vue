@@ -1,16 +1,41 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router';
+import ConfirmationComponent from '../components/ConfirmationComponent.vue';
 import Navbar from '../components/NavBarComponent.vue';
+import Footer from '../components/FooterComponent.vue';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+
+const store = useStore();
+const showConfirmation = computed(() => store.getters.showConfirmation);
 </script>
 
 <template>
-  <header>
-    <Navbar></Navbar>
-  </header>
-  <RouterView />
+  <ConfirmationComponent />
+  <div :class="{ 'app-content-blur': showConfirmation }" id="app-content">
+    <header>
+      <Navbar></Navbar>
+    </header>
+    <RouterView />
+    <div class="breaker"></div>
+    <Footer></Footer>
+  </div>
 </template>
 
 <style scoped lang="css">
+.app-content-blur {
+  filter: blur(5px);
+  transition: filter 0.5s ease-in-out;
+}
+
+#app-content {
+  min-height: 100vh;
+}
+
+.breaker {
+  height: 10rem;
+}
+
 header {
   display: flex;
   justify-content: center;

@@ -2,88 +2,117 @@
   <main>
     <div class="parent">
       <div class="splash-screen">
+        <Hyperdrive></Hyperdrive>
         <Counter />
-        <!-- Use the Counter component -->
+        <!-- Verwende die Counter-Komponente -->
       </div>
-      <div class="feed-1">2</div>
-      <div class="feed-2">3</div>
-      <div class="feed-3">4</div>
-      <div class="feed-4">5</div>
-      <div class="feed-5">6</div>
-      <div class="footer">7</div>
+      <div class="feed-container">
+        <FeedItem
+          v-for="(feed, index) in feeds"
+          :key="index"
+          :feed="feed"
+          :index="index"
+          :is-expanded="isExpanded[index]"
+          @toggle-expand="toggleExpand(index)"
+        />
+      </div>
+      <div class="footer">
+        <a
+          class="insta-button"
+          href="https://www.instagram.com/sund.space/"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Mehr Neuigkeiten</a
+        >
+      </div>
       <div class="rocket-element">
-        <Rocket></Rocket>
+        <Rocket />
       </div>
     </div>
   </main>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
 import Counter from '../components/CounterComponent.vue';
+import feedData from '../../../src/assets/json/feed.json';
+import FeedItem from '../components/FeedItemComponent.vue'; // Neue Komponente für die Feed-Elemente
 import Rocket from '../components/RocketComponent.vue';
+import Hyperdrive from '../components/HyperdriveComponent.vue';
+
+const feeds = ref(feedData);
+const isExpanded = ref(new Array(feeds.value.length).fill(false));
+
+// Dynamischer Import der Bilder basierend auf dem Bildnamen
+const getImagePath = (imageName: string) => {
+  return new URL(`../../../src/assets/pics/${imageName}`, import.meta.url).href;
+};
+
+const toggleExpand = (index: number) => {
+  isExpanded.value[index] = !isExpanded.value[index];
+};
 </script>
 
-<style scoped lang="css">
+<style scoped>
 .parent {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(7, auto);
-  gap: 8px;
-}
-
-.parent div {
-  color: #dadada;
+  grid-auto-rows: auto; /* Automatische Anpassung der Zeilenhöhe */
+  gap: 16px; /* Abstand zwischen den Elementen */
 }
 
 .splash-screen {
-  grid-column: span 3 / span 3;
-  height: 80vh;
+  grid-column: span 3;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
 }
 
-.feed-1 {
-  grid-column: span 2 / span 2;
-  grid-row-start: 2;
-}
-
-.feed-2 {
-  grid-column: span 2 / span 2;
-  grid-column-start: 1;
-  grid-row-start: 3;
-}
-
-.feed-3 {
-  grid-column: span 2 / span 2;
-  grid-column-start: 1;
-  grid-row-start: 4;
-}
-
-.feed-4 {
-  grid-column: span 2 / span 2;
-  grid-column-start: 1;
-  grid-row-start: 5;
-}
-
-.feed-5 {
-  grid-column: span 2 / span 2;
-  grid-column-start: 1;
-  grid-row-start: 6;
+.feed-container {
+  grid-column: span 2; /* Die Feed-Elemente sollen auf 2 Spalten bleiben */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Abstand zwischen den Feed-Items */
 }
 
 .footer {
-  grid-column: span 3 / span 3;
-  grid-column-start: 1;
-  grid-row-start: 7;
+  grid-column: span 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
 }
 
 .rocket-element {
-  grid-row: span 5 / span 5;
-  grid-column-start: 3;
-  grid-row-start: 2;
-  width: 100%;
+  grid-column: 3; /* Die Rakete bleibt in der dritten Spalte */
+  grid-row: 2 / span 5; /* Die Rakete erstreckt sich vertikal über den Feed */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   max-width: 25vw;
-  height: auto;
+  overflow: hidden;
+  position: sticky; /* Die Rakete bleibt fixiert */
+  top: 20px; /* Die Rakete bleibt mit einem kleinen Abstand vom oberen Rand */
+}
+
+.insta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: blueviolet;
+  border: none;
+  border-radius: 20px;
+  width: 150px;
+  height: 50px;
+  color: black;
+  font-size: 16px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.insta-button:hover {
+  background-color: #fddb3a;
 }
 </style>

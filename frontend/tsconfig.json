@@ -6,6 +6,8 @@
     "strict": true,
     "jsx": "preserve",
     "jsxImportSource": "vue",
+    "module": "es2020",
+    "target": "es2020",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "composite": false
