@@ -2,6 +2,7 @@
   <main>
     <div class="parent">
       <div class="splash-screen">
+        <Hyperdrive></Hyperdrive>
         <Counter />
         <!-- Verwende die Counter-Komponente -->
       </div>
@@ -37,6 +38,7 @@ import Counter from '../components/CounterComponent.vue';
 import feedData from '../../../src/assets/json/feed.json';
 import FeedItem from '../components/FeedItemComponent.vue'; // Neue Komponente für die Feed-Elemente
 import Rocket from '../components/RocketComponent.vue';
+import Hyperdrive from '../components/HyperdriveComponent.vue';
 
 const feeds = ref(feedData);
 const isExpanded = ref(new Array(feeds.value.length).fill(false));
@@ -65,6 +67,7 @@ const toggleExpand = (index: number) => {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: transparent;
 }
 
 .feed-container {

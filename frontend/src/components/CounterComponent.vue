@@ -46,5 +46,6 @@ const formattedValue = computed(() => `${value.value}${suffix}`);
   font-size: 25vh; /* Customize font size */
   font-weight: bold; /* Customize font weight */
   color: #fddb3a !important; /* Customize text color */
+  z-index: 50;
 }
 </style>
