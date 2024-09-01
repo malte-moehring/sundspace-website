@@ -1,6 +1,6 @@
 # Project Name
 
-A brief description of your project, its purpose, and functionality.
+This is the proof of concept for the rocket team of my university. The goal is to work on the design and prepare the future functionality and functions needed.
 
 ## Table of Contents
 
